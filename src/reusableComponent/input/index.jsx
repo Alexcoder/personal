@@ -3,7 +3,7 @@ import "./styles.css"
 function Input({title, name, value,placeholder, onChange}){
 
     return(
-        <div className="input_container">
+        <div className="input_container" style={{width:"206px"}}>
         <span style={{float:"left"}}>{title}</span> <br/>
        <input 
        className="field"

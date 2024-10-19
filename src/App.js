@@ -42,9 +42,11 @@ function App() {
      <Input 
      title={<strong>Date</strong>}
      />
+     <br/>
      <Input
      title={<strong>Amount</strong>} 
      />
+     <br/>
      <Select
      title={<strong>Category</strong>} 
      data={[ "Food", "Clothing","Groceries","Generator", "Miscellaneous", "Health Care","Logistics"]}
