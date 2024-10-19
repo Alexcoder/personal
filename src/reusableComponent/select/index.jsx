@@ -12,7 +12,7 @@ function Select({title, name, value,placeholder,onChange, onClick, data}){
         <div className="input_container" 
         onClick={()=> setActiveInput(prev=> !prev) }style={{backgroundColor:"lightgray"}}>
            <input
-           style={{width:"148px",backgroundColor:"lightgray" }}
+           style={{width:"",backgroundColor:"lightgray" }}
            className="select_input"
            name={name}
            value={value}
