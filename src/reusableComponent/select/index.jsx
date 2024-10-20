@@ -7,7 +7,7 @@ function Select({title, name, value,placeholder,onChange, onClick, data}){
 
     console.log(display)
     return(
-        <div className="select_container">
+        <div className="select_containerx">
         <span style={{float:"left"}}>{title}</span> <br/>
         <div className="input_container" 
         onClick={()=> setActiveInput(prev=> !prev) }style={{backgroundColor:"lightgray"}}>
