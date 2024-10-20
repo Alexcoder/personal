@@ -1,58 +1,19 @@
 import './App.css';
-import Input from './reusableComponent/input';
-import Select from "./reusableComponent/select";
+import HouseTracker from './component/houseTracker';
+import * as hooks from "./hooks"
 
 function App() {
-  const monthFormat ={
-    Jan : "January",
-    Feb : "February",
-    Mar : "March",
-    Apr : "April",
-    May : "May",
-    Jun : "June",
-    Jul : "July",
-    Aug : "August",
-    Sep : "September",  
-    Oct : "October" ,
-    Nov : "November",
-    Dec : "December",
-  };
-
-  const formatDate ={
-    weekDay : new Date().toString().slice(0,3),
-    date    : new Date().getDate(),
-    month   : monthFormat[`${new Date().toString().slice(4,7)}`],
-    year    : new Date().toString().slice(11,15),
-    time    : new Date().toString().slice(15,24),
-    fullDate(){
-      return `${this.date}-${this.month}-${this.year}`
-  }
-};
-  
-
 
   return (
     <div className="Appx" 
      style={{display:"grid", placeContent:"center", width:"auto", minHeight:"100vh", placeItems:"initial", backgroundColor:"rgba(50, 50, 200, 0.5)"}}
       >
-      <h1>{formatDate.weekDay}</h1>
-     <div>{formatDate.time}</div>
-     <div>{formatDate.fullDate()}</div>
+      <h1>{hooks.formatDate.weekDay}</h1>
+     <div>{hooks.formatDate.time}</div>
+     <div>{hooks.formatDate.fullDate()}</div>
+
+     <HouseTracker/>
      
-     <Input 
-     title={<strong>Date</strong>}
-     />
-     <br/>
-     <Input
-     title={<strong>Amount</strong>} 
-     />
-     <br/>
-     <Select
-     title={<strong>Category</strong>} 
-     data={[ "Food", "Clothing","Groceries","Generator", "Miscellaneous", "Health Care","Logistics"]}
-     placeholder={"Category"}
-     onClick={(item)=> {}}
-     />
 
     </div>
   );

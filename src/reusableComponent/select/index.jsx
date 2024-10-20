@@ -30,7 +30,7 @@ function Select({title, name, value,placeholder,onChange, onClick, data}){
              data.map((item, i)=>(
                  <div 
                  key={i}
-                 style={{cursor:"pointer", backgroundColor: i%2 ? "white" : "rgba(200,50,50, 0.2)", fontSize:"18px", color:"darkgray"}}
+                 style={{cursor:"pointer", backgroundColor: i%2 ? "white" : "rgba(200,50,80, 0.2)", fontSize:"16px", color:"black"}}
                   onClick={()=>{onClick(item); setDisplay(prev=> !prev)}}
             >{display && item}</div>
         ))
