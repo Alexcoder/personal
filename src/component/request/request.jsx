@@ -42,9 +42,9 @@ function Request (){
 
   return (
     <div className="request-cont">
-       <strong>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].purpose : ""}</strong> 
-       <strong>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].detail : ""}</strong> 
-        <strong>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].amountRequired[0].amount : ""}</strong>
+       <div style={{fontWeight:"500"}}>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].purpose : ""}</div> 
+       <div style={{fontWeight:"500"}}>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].detail : ""}</div> 
+        <div style={{fontWeight:"500"}}>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].amountRequired[0].amount : ""}</div>
         { true ?
         < AddExpense 
           request={request}
