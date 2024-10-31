@@ -1,3 +1,14 @@
+import axios from "axios";
+
+export const api = axios.create({
+    // baseURL: "http://localhost:8000/api"
+    baseURL: "https://personal-api-amc2.onrender.com/api"
+});
+
+export const getPost=(route)=> api.get(route);
+export const createPost=(route, data)=> api.post(route, data)
+export const upDatePost=(route, data)=> api.post(route, data)
+export const deletePost=(routeWithParams)=> api.delete(routeWithParams)
 
 export const monthFormat ={
     Jan : "January",
