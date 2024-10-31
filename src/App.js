@@ -29,7 +29,7 @@ function App() {
       <h1>JAY</h1>
       <h1>{hooks.formatDate.weekDay}</h1>
      {/* <div>{hooks.formatDate.time}</div> */}
-     {/* <div>{hooks.formatDate.fullDate()}</div> */}
+     <div>{hooks.formatDate.fullDate()}</div>
 
     
      <Routes>

@@ -43,6 +43,7 @@ function Request (){
   return (
     <div className="request-cont">
        <div>{datafromDB.length && datafromDB[datafromDB.length-1].budget[0].purpose}</div> 
+       <div>{datafromDB.length && datafromDB[datafromDB.length-1].budget[0].detail}</div> 
         <div>{datafromDB.length && datafromDB[datafromDB.length-1].budget[0].amountRequired[0].amount}</div>
         { true ?
         < AddExpense 
