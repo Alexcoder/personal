@@ -12,9 +12,8 @@ function App() {
     <div className="Appx" 
      style={{display:"grid", placeContent:"center", width:"auto", minHeight:"100vh", placeItems:"initial", backgroundColor:"rgba(50, 50, 200, 0.5)"}}
       >
-      <h1>JAY</h1>
       <h1>{hooks.formatDate.weekDay}</h1>
-     {/* <div>{hooks.formatDate.time}</div> */}
+     <div>{hooks.formatDate.time}</div>
      <div>{hooks.formatDate.fullDate()}</div>
 
     
