@@ -1,11 +1,12 @@
 import './App.css';
 import HouseTracker from './component/houseTracker/houseTracker';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Request from './component/request/request';
 import * as hooks from "./hooks/hooks"
 import AllData from "./component/allData/allData";
 
 function App() {
+  const navigate = useNavigate();
 
 
   return (
@@ -15,6 +16,8 @@ function App() {
       <h1>{hooks.formatDate.weekDay}</h1>
      <div>{hooks.formatDate.time}</div>
      <div>{hooks.formatDate.fullDate()}</div>
+     <button onClick={()=> navigate("/allData")}>View Log</button>
+     <button style={{marginBottom:"5px"}} onClick={()=> navigate("/")}>Request</button>
 
     
      <Routes>
