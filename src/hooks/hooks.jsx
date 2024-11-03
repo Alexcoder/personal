@@ -40,3 +40,8 @@ export const getItemLocalStorage =(key, value)=> JSON.parse(localStorage.getItem
 export const setItemLocalStorage =(key, value)=> localStorage.setItem(key, JSON.stringify(value)) 
 export const clearLocalStorage =(key)=> localStorage.setItem(key) 
 
+export function formatNumber(number) {
+  return new Intl.NumberFormat('en-US').format(number);
+};
+
+

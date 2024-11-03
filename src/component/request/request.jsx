@@ -2,10 +2,13 @@ import { useState, } from 'react'
 import AddExpense from './sub/addExpense'
 import ShowTracker from './sub/showTracker';
 // import { useDispatch } from 'react-redux'
-import * as Hooks from "../../hooks"
+import * as Hooks from "../../hooks/hooks"
+import { useNavigate } from 'react-router-dom';
+
 
 function Request (){
     // const dispatch = useDispatch()
+    const navigate = useNavigate()
     
 
     const initialState={
@@ -30,9 +33,10 @@ function Request (){
 
     const handleClick = async()=>{
         try{
-          const res = await Hooks.createPost("/houseTracker/createRequest", request)
+          const res = await Hooks.createPost("/houseTracker/createRequest", {...request, type: "todo"})
           setRequest(initialState)
-          setDatafromDB([res?.data])
+          setDatafromDB([...datafromDB, res?.data])
+          navigate("/allData")
         }catch(err){
             throw(err)          
         }
@@ -42,9 +46,6 @@ function Request (){
 
   return (
     <div className="request-cont">
-       <div style={{fontWeight:"500"}}>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].purpose : ""}</div> 
-       <div style={{fontWeight:"500"}}>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].detail : ""}</div> 
-        <div style={{fontWeight:"500"}}>{datafromDB.length ? datafromDB[datafromDB.length-1].budget[0].amountRequired[0].amount : ""}</div>
         { true ?
         < AddExpense 
           request={request}
