@@ -3,8 +3,6 @@
     background-color: aliceblue;
     padding: 4px;
     border-radius: 2px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
 }
 .budget{
     background-color: orange;
@@ -12,5 +10,4 @@
     padding: 6px;
     margin-bottom: 4px;
     border-radius: 2px;
-    display: flex;
 }
