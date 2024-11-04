@@ -39,6 +39,7 @@ const AllData = () => {
                         <div className="budgetItem">NGN {hooks.formatNumber(budget.amount[0].required)}</div>
                         <div className="budgetItem">{budget.amount[0].date}</div>
                         <div className="budgetItem">{budget.amount[0].status}</div>
+                        <button onClick={()=> deleteItem(budget?._id)} className="item">X</button>
                     </div>
                 ))}
                 <button
