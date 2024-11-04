@@ -14,7 +14,6 @@ const AllData = () => {
       }
       fetchData()
   },[]);
-  console.log("dataFromDB allData.js", datafromDB)
 
   const deleteItem=async(id)=>{
     try{
@@ -36,11 +35,28 @@ const AllData = () => {
   }
 
 
+const sum =(month, year)=>{
+    const filtered= datafromDB?.filter(item=>(
+        (item.month==="November" & item.year===2024)
+    ));
+    const res = filtered.reduce((acc, value)=>(
+        acc + value.amount
+    ), 0)
+
+return res
+}
+console.log("filtered", sum())
+
   return (
     <div className='allData'>
         {datafromDB?.map((item)=>(
             <div key={item?._id} className="mapCont">
+                <button
+                style={{float: "right"}}
+                onClick={()=> deleteItem(item?._id)}
+                className="item">delete</button>
                 <div><strong className="item">{item.month}</strong></div>
+                <section className='budgetWrapper'>
                 {item?.budget.map(budget=>(
                     <div key={budget?._id} className="budget">
                         <div className="budgetItem">{budget.purpose}</div>
@@ -51,9 +67,10 @@ const AllData = () => {
                         <button onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button>
                     </div>
                 ))}
-                <button
+                </section>
+                {/* <button
                 onClick={()=> deleteItem(item?._id)}
-                 className="item">delete</button>
+                 className="item">delete</button> */}
             </div>
         ))}
     </div>
