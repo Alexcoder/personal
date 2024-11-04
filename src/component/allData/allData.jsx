@@ -16,12 +16,20 @@ const AllData = () => {
   },[]);
   console.log("dataFromDB allData.js", datafromDB)
 
-  const deleteItem=async(id,budgetId)=>{
-    const par = {id, budgetId}
+  const deleteItem=async(id)=>{
     try{
-            await hooks.deletePost(`/houseTracker/delete/${par}`)
+            await hooks.deletePost(`/houseTracker/delete/${id}`)
             const findIndex = datafromDB.findIndex(item=> item._id===id)
             setDatafromDB(datafromDB.splice(findIndex, 0))
+    }catch(err){
+        throw(err)
+    }
+  }
+  const deleteBudget=async(id,budgetId)=>{
+    try{
+            await hooks.deletePost(`/houseTracker/deleteBudget/${id}/${budgetId}`)
+            // const findIndex = datafromDB.findIndex(item=> item._id===id)
+            // setDatafromDB(datafromDB.splice(findIndex, 0))
     }catch(err){
         throw(err)
     }
@@ -40,7 +48,7 @@ const AllData = () => {
                         <div className="budgetItem">NGN {hooks.formatNumber(budget.amount[0].required)}</div>
                         <div className="budgetItem">{budget.amount[0].date}</div>
                         <div className="budgetItem">{budget.amount[0].status}</div>
-                        <button onClick={()=> deleteItem(item?._id, budget?._id)} className="item">X</button>
+                        <button onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button>
                     </div>
                 ))}
                 <button

@@ -1,6 +1,6 @@
 import './App.css';
 import HouseTracker from './component/houseTracker/houseTracker';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Request from './component/request/request';
 import * as hooks from "./hooks/hooks"
 import AllData from "./component/allData/allData";
