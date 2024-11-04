@@ -16,6 +16,7 @@ function Request (){
         detail:"",
         amountRequired: "",
         month: Hooks.formatDate.month ,
+        year: Hooks.formatDate.year ,
         date: Hooks.formatDate.fullDate()
     }
 
