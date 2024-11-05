@@ -4,12 +4,15 @@ import "./allData.css"
 
 const AllData = () => {
     const [datafromDB, setDatafromDB] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
       const fetchData=async()=>{
           try{
+              setLoading(true)
               const res = await hooks.getPost("/houseTracker/")
               setDatafromDB(res?.data)
+              setLoading(false)
           }catch(err){ throw(err)}
       }
       fetchData()
@@ -54,6 +57,7 @@ return  (
 
   return (
     <div className='allData'>
+        {loading && "loading..."}
         {datafromDB?.map((item)=>(
             <div key={item?._id} className="mapCont">
                 <button
@@ -70,7 +74,7 @@ return  (
                         <div className="budgetItem">NGN {hooks.formatNumber(budget.amount[0].required)}</div>
                         <div className="budgetItem">{budget.amount[0].date}</div>
                         <div className="budgetItem">{budget.amount[0].status}</div>
-                        <button onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button>
+                        <button style={{display:"none"}} onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button>
                     </div>
                 ))}
                 </section>
