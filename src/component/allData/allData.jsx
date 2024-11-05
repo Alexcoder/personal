@@ -37,15 +37,20 @@ const AllData = () => {
 
 const sum =(month, year)=>{
     const filtered= datafromDB?.filter(item=>(
-        (item.month==="November" & item.year===2024)
+        (item.month===month & item.year===year)
     ));
-    const res = filtered.reduce((acc, value)=>(
-        acc + value.amount
-    ), 0)
+    const budget = filtered.map(item=>(
+        item.budget
+    ));
+    const amount = budget.flat().map(item=>(
+        item.amount
+    ));
+    const amountRequired = amount.flat().reduce((acc, value)=>(acc + value.required),0)
 
-return res
+return  (
+    <div>NGN {Intl.NumberFormat().format(amountRequired)}</div>    
+)
 }
-console.log("filtered", sum())
 
   return (
     <div className='allData'>
@@ -54,8 +59,9 @@ console.log("filtered", sum())
                 <button
                 style={{float: "right"}}
                 onClick={()=> deleteItem(item?._id)}
-                className="item">delete</button>
+                className="item">X</button>
                 <div><strong className="item">{item.month}</strong></div>
+                <div><strong className="item">{sum(item.month, item.year)}</strong></div>
                 <section className='budgetWrapper'>
                 {item?.budget.map(budget=>(
                     <div key={budget?._id} className="budget">
