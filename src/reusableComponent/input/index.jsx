@@ -1,6 +1,6 @@
 import "./styles.css"
 
-function Input({title, name, value,placeholder, onChange}){
+function Input({title, name,type, value,placeholder, onChange}){
 
     return(
         <div className="input_container" style={{width:""}}>
@@ -9,6 +9,7 @@ function Input({title, name, value,placeholder, onChange}){
                  className="field"
                  style={{backgroundColor:"lightgray", border:"none", outline:"none"}}
                  name={name}
+                 type={type}
                  value={value}
                  placeholder={placeholder}
                  onChange={onChange}

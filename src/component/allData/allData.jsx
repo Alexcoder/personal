@@ -53,27 +53,32 @@ const sum =(month, year)=>{
 return  (
     <div>NGN {Intl.NumberFormat().format(amountRequired)}</div>    
 )
-}
+};
+
+function budgetColor(status){
+   return status!=="pending"? "orange" 
+          : "green"
+};
 
   return (
     <div className='allData'>
-        {loading && "loading..."}
+        {loading && "page loading..."}
         {datafromDB?.map((item)=>(
             <div key={item?._id} className="mapCont">
                 <button
-                style={{float: "right"}}
+                style={{float: "right", backgroundColor:"darkred", border:"none", color:"white"}}
                 onClick={()=> deleteItem(item?._id)}
                 className="item">X</button>
                 <div><strong className="item">{item.month}</strong></div>
                 <div><strong className="item">{sum(item.month, item.year)}</strong></div>
                 <section className='budgetWrapper'>
                 {item?.budget.map(budget=>(
-                    <div key={budget?._id} className="budget">
-                        <div className="budgetItem">{budget.purpose}</div>
-                        <div className="budgetItem">{budget.detail}</div>
+                    <div key={budget?._id} className="budget" style={{backgroundColor: budgetColor(budget.amount[0].status)}}>
+                        <div className="budgetItem" style={{fontSize:"18px"}}>{budget.purpose}</div>
+                        <div className="budgetItem" style={{fontSize:"14px"}}>{budget.detail}</div>
                         <div className="budgetItem">NGN {hooks.formatNumber(budget.amount[0].required)}</div>
-                        <div className="budgetItem">{budget.amount[0].date}</div>
-                        <div className="budgetItem">{budget.amount[0].status}</div>
+                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.amount[0].date}</div>
+                        {/* <div className="budgetItem">{budget.amount[0].status}</div> */}
                         <button style={{display:"none"}} onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button>
                     </div>
                 ))}
