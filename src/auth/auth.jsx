@@ -3,8 +3,10 @@ import Input from '../reusableComponent/input';
 import Button from '../reusableComponent/button';
 import * as Hooks from "../hooks/hooks"
 import "./auth.css"
+import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
+    const navigate = useNavigate()
     const initialState={
         email : "",
         password:"",
@@ -34,7 +36,8 @@ const Auth = () => {
           const res = await Hooks.createPost(`/auth/${route}`, request)
           setRequest(initialState)
           Hooks.setItemLocalStorage("user", res?.data)
-        //   navigate("/allData")
+          setRequest(initialState)
+          navigate("/allData")
         }catch(err){
             setErrorMessage(err.response)          
         }
@@ -68,7 +71,7 @@ const Auth = () => {
         <div style={{fontSize:"12px", marginRight:"10px", marginTop:"10px"}}>{newUser ? "Already have an account?" : "Dont have account?"}
             <strong onClick={()=> setNewUser(prev=> !prev)} style={{marginLeft:"8px", fontSize:"12px", cursor:"pointer", color:"purple",}}>{newUser? "Login": "Register"}</strong>
         </div>
-        {/* <div style={{fontSize:"12px", color:"darkRed", fontWeight:"600"}}>{errorMessage?.data}</div> */}
+        <div style={{fontSize:"12px", color:"darkRed", fontWeight:"600"}}>{errorMessage?.data}</div>
       <Button title={newUser? "Create Account" :"Login"} onClick={()=> check()}/>
 
    
