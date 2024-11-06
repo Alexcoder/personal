@@ -36,7 +36,7 @@ const Auth = () => {
           Hooks.setItemLocalStorage("user", res?.data)
         //   navigate("/allData")
         }catch(err){
-            setErrorMessage(err)          
+            setErrorMessage(err.response)          
         }
     };
 
@@ -53,7 +53,7 @@ const Auth = () => {
 
   return (
     <div className='auth-cont'>
-        {/* ErrorMessage: {errorMessage} */}
+        ErrorMessage: {errorMessage.data.message}
      {
         formData.slice(0, formLength).map((item,i)=>(
             <Input 
