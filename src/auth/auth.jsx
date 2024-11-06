@@ -53,7 +53,6 @@ const Auth = () => {
 
   return (
     <div className='auth-cont'>
-        ErrorMessage: {errorMessage.data.message}
      {
         formData.slice(0, formLength).map((item,i)=>(
             <Input 
@@ -69,6 +68,7 @@ const Auth = () => {
         <div style={{fontSize:"12px", marginRight:"10px", marginTop:"10px"}}>{newUser ? "Already have an account?" : "Dont have account?"}
             <strong onClick={()=> setNewUser(prev=> !prev)} style={{marginLeft:"8px", fontSize:"12px", cursor:"pointer", color:"purple",}}>{newUser? "Login": "Register"}</strong>
         </div>
+        {/* <div style={{fontSize:"12px", color:"darkRed", fontWeight:"600"}}>{errorMessage?.data}</div> */}
       <Button title={newUser? "Create Account" :"Login"} onClick={()=> check()}/>
 
    
