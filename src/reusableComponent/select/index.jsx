@@ -20,9 +20,9 @@ function Select({title, name, value,placeholder,onChange, onClick, data}){
            onChange={onChange}
            disabled={activeInput}
            />
-        <div style={{cursor:"pointer"}}
+        <div style={{cursor:"pointer", fontWeigth:"700",color:"darkred", }}
              className="select_btn" 
-             onClick={()=> setDisplay(prev=> !prev)}>?</div>  
+             onClick={()=> setDisplay(prev=> !prev)}>+</div>  
         </div>
         {
         <div style={{padding:"2px 0px",maxHeight:"90px", overflow:"auto"}}>

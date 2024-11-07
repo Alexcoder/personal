@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 import HouseTracker from './component/houseTracker/houseTracker';
 import { Route, Routes, useNavigate } from 'react-router-dom';
@@ -8,6 +9,20 @@ import AllData from "./component/allData/allData";
 
 function App() {
   const navigate = useNavigate();
+  const [user, setUser] = useState("");
+
+  const getStorage = hooks.getItemLocalStorage("user") || ""
+  useEffect(()=>{
+    setUser(getStorage)
+  },[getStorage])
+
+  const ReRouteAuth=(Component)=>{
+    return(
+      <div>
+        {user? <Component/> : <Auth/>}
+      </div>
+    )
+  };
 
 
   return (
@@ -18,17 +33,17 @@ function App() {
      <div>{hooks.formatDate.time}</div>
      <div>{hooks.formatDate.fullDate()}</div>
      <div className='btn-cont'>
-      <button className='btn' onClick={()=> navigate("/allData")}>View</button>
-      <button className='btn' onClick={()=> navigate("/auth")}>Login</button>
-      <button className='btn' onClick={()=> navigate("/")}>Add</button>
+      {user && <button className='btn' onClick={()=> navigate("/allData")}>View</button>}
+      {user && <button className='btn' onClick={()=> {hooks.clearLocalStorage("user") ; navigate("/auth")}}>Logout</button>}
+      {user && <button className='btn' onClick={()=> navigate("/")}>Add</button>}
      </div>
 
     
      <Routes>
-       <Route path="/" element={ <Request/>}/>
-       <Route path="/auth" element={ <Auth/>}/>
-       <Route path="/budget"  element={ <HouseTracker/>}/>
-       <Route path="/allData"  element={ <AllData/>}/>
+       <Route path="/" element={ ReRouteAuth(Request)}/>
+       <Route path="/auth" element={ !user && <Auth/>}/>
+       <Route path="/budget"  element={ ReRouteAuth(HouseTracker)}/>
+       <Route path="/allData"  element={ ReRouteAuth(AllData)}/>
      </Routes>
      
 

@@ -1,4 +1,4 @@
-import { useState, } from 'react'
+import { useState, useEffect } from 'react'
 import AddExpense from './sub/addExpense'
 import ShowTracker from './sub/showTracker';
 // import { useDispatch } from 'react-redux'
@@ -9,10 +9,19 @@ import { useNavigate } from 'react-router-dom';
 function Request (){
     // const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [user, setUser]= useState("")
+
+    const userInLocalStorage = Hooks.getItemLocalStorage("user");
+    useEffect(()=>{
+      setUser(userInLocalStorage)
+     },[userInLocalStorage])
     
 
     const initialState={
-        purpose: "Select Purpose",
+        creator: user?._id,
+        firstName: user?.firstName,
+        lastName : user?.lastName,
+        purpose: "Select",
         detail:"",
         amountRequired: "",
         month: Hooks.formatDate.month ,

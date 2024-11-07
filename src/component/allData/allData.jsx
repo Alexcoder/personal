@@ -76,6 +76,7 @@ function budgetColor(status){
                     <div key={budget?._id} className="budget" style={{backgroundColor: budgetColor(budget.amount[0].status)}}>
                         <div className="budgetItem" style={{fontSize:"18px"}}>{budget.purpose}</div>
                         <div className="budgetItem" style={{fontSize:"14px"}}>{budget.detail}</div>
+                        <div className="budgetItem" style={{fontSize:"14px"}}>{budget.creator}</div>
                         <div className="budgetItem">NGN {hooks.formatNumber(budget.amount[0].required)}</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.amount[0].date}</div>
                         {/* <div className="budgetItem">{budget.amount[0].status}</div> */}
@@ -83,9 +84,6 @@ function budgetColor(status){
                     </div>
                 ))}
                 </section>
-                {/* <button
-                onClick={()=> deleteItem(item?._id)}
-                 className="item">delete</button> */}
             </div>
         ))}
     </div>

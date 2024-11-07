@@ -32,13 +32,13 @@ export const monthFormat ={
     year    : new Date().toString().slice(11,15),
     time    : new Date().toString().slice(15,24),
     fullDate(){
-      return `${this.date}-${this.month}-${this.year}`
+      return `${this.date} - ${this.month} - ${this.year}`
   }
 };
 
 export const getItemLocalStorage =(key, value)=> JSON.parse(localStorage.getItem(key, value));
 export const setItemLocalStorage =(key, value)=> localStorage.setItem(key, JSON.stringify(value)) 
-export const clearLocalStorage =(key)=> localStorage.setItem(key) 
+export const clearLocalStorage =(key)=> localStorage.clear(key) 
 
 export function formatNumber(number) {
   return new Intl.NumberFormat('en-US').format(number);
