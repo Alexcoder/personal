@@ -78,6 +78,7 @@ function budgetColor(status){
                         <div className="budgetItem" style={{fontSize:"18px"}}>{budget.purpose}</div>
                         <div className="budgetItem" style={{fontSize:"14px"}}>{budget.detail}</div>
                         <div className="budgetItem" style={{fontSize:"14px"}}>{budget.firstName}</div>
+                        {/* <div className="budgetItem" style={{fontSize:"14px"}}>{budget.creator}</div> */}
                         <div className="budgetItem">NGN {hooks.formatNumber(budget.amount[0].required)}</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.amount[0].date}</div>
                         {/* <div className="budgetItem">{budget.amount[0].status}</div> */}

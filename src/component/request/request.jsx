@@ -1,18 +1,23 @@
-import { useState, } from 'react'
+import { useEffect, useState, } from 'react'
 import AddExpense from './sub/addExpense'
 import ShowTracker from './sub/showTracker';
 // import { useDispatch } from 'react-redux'
 import * as Hooks from "../../hooks/hooks"
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 function Request (){
     // const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
     const [user, setUser]= useState(Hooks.getItemLocalStorage("user"))
 
-     console.log("user", user)
     
+    useEffect(()=>{
+      setUser(Hooks.getItemLocalStorage("user"))
+    },[location])
+    
+    console.log("user", user)
 
     const initialState={
         creator: user?._id,
