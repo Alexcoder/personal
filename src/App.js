@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import HouseTracker from './component/houseTracker/houseTracker';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Request from './component/request/request';
 import Auth from './auth/auth';
 import * as hooks from "./hooks/hooks"
@@ -11,6 +11,10 @@ function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(hooks.getItemLocalStorage("user"));
 
+  const location = useLocation()
+  useEffect(()=>{
+    setUser(hooks.getItemLocalStorage("user"))
+  },[location])
   
 
   const ReRouteAuth=(Component)=>{
