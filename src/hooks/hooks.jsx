@@ -32,7 +32,7 @@ export const monthFormat ={
     year    : new Date().toString().slice(11,15),
     time    : new Date().toString().slice(15,24),
     fullDate(){
-      return `${this.date} - ${this.month} - ${this.year}`
+      return `${this.date}-${this.month}-${this.year}`
   }
 };
 

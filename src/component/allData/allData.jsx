@@ -75,11 +75,11 @@ function budgetColor(status){
                 <section className='budgetWrapper'>
                 {item?.budget.map(budget=>(
                     <div key={budget?._id} className="budget" style={{backgroundColor: budgetColor(budget.amount[0].status)}}>
-                        <div className="budgetItem" style={{fontSize:"18px"}}>{budget.purpose}</div>
-                        <div className="budgetItem" style={{fontSize:"14px"}}>{budget.detail}</div>
+                        <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budget.purpose}</div>
+                        <div className="budgetItem" style={{fontSize:"14px", fontStyle:"italic"}}>{budget.detail}</div>
                         <div className="budgetItem" style={{fontSize:"14px"}}>{budget.firstName}</div>
                         {/* <div className="budgetItem" style={{fontSize:"14px"}}>{budget.creator}</div> */}
-                        <div className="budgetItem">NGN {hooks.formatNumber(budget.amount[0].required)}</div>
+                        <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.amount[0].required)}</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.amount[0].date}</div>
                         {/* <div className="budgetItem">{budget.amount[0].status}</div> */}
                         <button style={{display:"none"}} onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button>

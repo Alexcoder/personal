@@ -33,7 +33,7 @@ function App() {
       <h1>{hooks.formatDate.weekDay}</h1>
      <div>{hooks.formatDate.time}</div>
      <div>{hooks.formatDate.fullDate()}</div>
-     <div className='btn-cont' style={{position:"fixed", top:"0", left:"0", right:"0", backgroundColor:"lightgray", padding:"6px"}}>
+     <div className='btn-cont' style={{position:"fixed", top:"0", left:"0", right:"0", backgroundColor:"white", padding:"6px"}}>
       {user && <button className='btn' onClick={()=> navigate("/allData")}>View</button>}
       {user && <button className='btn' onClick={()=> {hooks.clearLocalStorage("user") ; navigate("/auth"); setUser("")}}>Logout</button>}
       {user && <button className='btn' onClick={()=> navigate("/")}>Add</button>}
