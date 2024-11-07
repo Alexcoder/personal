@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, } from 'react'
 import AddExpense from './sub/addExpense'
 import ShowTracker from './sub/showTracker';
 // import { useDispatch } from 'react-redux'
@@ -9,12 +9,9 @@ import { useNavigate } from 'react-router-dom';
 function Request (){
     // const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [user, setUser]= useState("")
+    const [user, setUser]= useState(Hooks.getItemLocalStorage("user"))
 
-    const userInLocalStorage = Hooks.getItemLocalStorage("user");
-    useEffect(()=>{
-      setUser(userInLocalStorage)
-     },[userInLocalStorage])
+     console.log("user", user)
     
 
     const initialState={
@@ -46,6 +43,7 @@ function Request (){
           const res = await Hooks.createPost("/houseTracker/createRequest", {...request, type: "todo"})
           setRequest(initialState)
           setDatafromDB([...datafromDB, res?.data])
+          setUser(Hooks.getItemLocalStorage("user"))
           navigate("/allData")
         }catch(err){
             throw(err)          
