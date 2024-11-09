@@ -45,11 +45,23 @@ function Request (){
 
     const handleClick = async()=>{
         try{
-          const res = await Hooks.createPost("/houseTracker/createRequest", {...request, type: "todo"})
-          setRequest(initialState)
-          setDatafromDB([...datafromDB, res?.data])
-          setUser(Hooks.getItemLocalStorage("user"))
-          navigate("/allData")
+          if(request.purpose==="Select"){
+            alert("Select Purpose to continue")
+            return
+          }else if(request.detail===""){
+            alert("Input detail to continue")
+            return
+          }else if(request.amountRequired===""){
+            alert("Input amount to continue")
+            return
+          }else{
+            const res = await Hooks.createPost("/houseTracker/createRequest", {...request, type: "todo"})
+            setRequest(initialState)
+            setDatafromDB([...datafromDB, res?.data])
+            setUser(Hooks.getItemLocalStorage("user"))
+            navigate("/allData")
+          }
+
         }catch(err){
             throw(err)          
         }

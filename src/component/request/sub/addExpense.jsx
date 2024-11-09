@@ -24,7 +24,7 @@ const AddExpense = ({request, setRequest, formData, handleChange, handleClick}) 
                 onChange={handleChange}
             />))
         }
-      <Button title={"Submit"} onClick={()=> handleClick()}/>
+      <Button disabled={(request.purpose==="")} title={"Submit"} onClick={()=> handleClick()}/>
 
 
       
