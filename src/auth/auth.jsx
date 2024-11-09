@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import Input from '../reusableComponent/input';
-import Button from '../reusableComponent/button';
+import Input from '../reusableComponent/input/input';
+import Button from '../reusableComponent/button/button';
 import * as Hooks from "../hooks/hooks"
 import "./auth.css"
 import { useNavigate } from 'react-router-dom';

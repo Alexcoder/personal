@@ -1,5 +1,5 @@
-import Input from "../../reusableComponent/input";
-import Select from "../../reusableComponent/select";
+import Input from "../../reusableComponent/input/input";
+import Select from "../../reusableComponent/select/select";
 import Utils from "./utils";
 
 function HouseTracker(){

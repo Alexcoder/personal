@@ -1,7 +1,7 @@
 import React from 'react'
-import Select from '../../../reusableComponent/select'
-import Input from '../../../reusableComponent/input'
-import Button from '../../../reusableComponent/button'
+import Select from '../../../reusableComponent/select/select'
+import Input from '../../../reusableComponent/input/input'
+import Button from '../../../reusableComponent/button/button'
 
 const AddExpense = ({request, setRequest, formData, handleChange, handleClick}) => {
   return (
