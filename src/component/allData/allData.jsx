@@ -88,10 +88,10 @@ function budgetColor(status){
                     <div key={budget?._id} className="budget" 
                     style={{backgroundColor: budgetColor(budget.expenseList[0].status)}}
                     >
-                        {/* <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budget.amountRequired.date}</div> */}
+                        <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budget.expenseList[0].purpose}</div>
                         <div className="budgetItem" style={{fontSize:"14px", fontStyle:"italic"}}>{budget.expenseList[0].detail}</div>
                         <div className="budgetItem" style={{fontSize:"14px"}}>{budget.expenseList[0].firstName}</div>
-                        <div className="budgetItem" style={{fontSize:"14px"}}>{budget.expenseList[0].creator}</div>
+
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date}</div>
                         {/* <div className="budgetItem">{budget.expenseList[0].status}</div> */}
