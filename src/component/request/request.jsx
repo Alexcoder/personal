@@ -17,12 +17,14 @@ function Request (){
       setUser(Hooks.getItemLocalStorage("user"))
     },[location])
     
-    console.log("user", user)
+    // console.log("user", user)
 
     const initialState={
         creator: user?._id,
         firstName: user?.firstName,
         lastName : user?.lastName,
+        email    : user?.email,
+        username : user?.username,
         purpose: "Select",
         detail:"",
         amountRequired: "",
