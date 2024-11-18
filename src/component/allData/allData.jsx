@@ -109,7 +109,7 @@ function budgetColor(status){
                 style={{float: "right", backgroundColor:"darkred", border:"none", color:"white"}}
                 onClick={()=> deleteItem(item?._id)}
                 className="item">X</button>
-                <div><strong className="item">{item.month}</strong></div>
+                <div><strong className="item" style={{textTransform:"uppercase"}}>{item.month}  {item.year}</strong></div>
                 <div><strong className="item">{sum(item.month, item.year)}</strong></div>
                 <section className='budgetWrapper'>
                 {item?.budget.map(budget=>(
