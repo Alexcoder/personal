@@ -122,7 +122,7 @@ function budgetColor(status){
 
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date}</div>
-                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].email}</div>
+                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].email.slice(0,12)}...</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].username}</div>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
                         { true && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "approved")} className="budgetItem" style={{background:"red", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "approve" : ""}</div>}
