@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import * as hooks from "../../hooks/hooks";
+import {useGlobalState} from "../../state/context/context"
 import "./allData.css"
 
 const AllData = () => {
     const [datafromDB, setDatafromDB] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const {user} = useGlobalState();
+    // const [request, setRequest]=useState({})
     console.log("datafromDB", datafromDB)
 
     useEffect(()=>{
@@ -40,35 +43,61 @@ const AllData = () => {
 
 
 const sum =(month, year)=>{
-    const filtered= datafromDB?.filter(item=>(
+    const requestTime= datafromDB?.filter(item=>(
         (item.month===month & item.year===year)
     ));
-    const budget = filtered.map(item=>(
-        item.budget
+    const budget = requestTime.map(timeframe=>(
+        timeframe.budget
     ));
 
     const amount = budget.map(item=>(
         item
-    ));
-    const expense = amount.flat().map(item=>(
+    )).flat();
+    const expenseList = amount.map(item=>(
         item.expenseList
-    ));
-    // const sent = amount.flat().map(item=>(
-    //     item.amountSent
-    // ));
-    const expenseList    = expense.flat();
-    // const amountSentList = sent.flat();
+    )).flat();
     const amountRequired = expenseList.reduce((acc, value)=>(acc + value.amountRequired),0)
 
 
 return  (
-    <div>NGN {Intl.NumberFormat().format(amountRequired)}</div>    
+    <div>NGN {hooks.formatNumber(amountRequired)}</div>    
 )
+};
+
+const handleApprove=async(postId, expenseId, expenseList, status)=>{
+   try{
+        const initialState={
+            creator       : user?._id,
+            firstName     : user?.firstName,
+            lastName      : user?.lastName,
+            purpose       : expenseList?.purpose,
+            
+            detail        : expenseList.detail,
+            amountRequired: expenseList.amountRequired,
+            month         : hooks.formatDate.month ,
+            year          : hooks.formatDate.year ,
+            date          : hooks.formatDate.fullDate(),
+            
+            expenseId : expenseId,
+            approve   : status
+    
+        }
+       const res = await hooks.upDatePost(`/houseTracker/update/${postId}`, initialState)
+       console.log("res", res?.data)
+       const findIndex =  datafromDB.findIndex(data=> data._id.toString(res?.data._id))
+       const arr = [...datafromDB]
+       arr[findIndex]=res?.data
+       console.log("arr", arr)
+       setDatafromDB(arr)
+  }catch(err){
+
+  }
 };
 
 
 function budgetColor(status){
-   return status!=="pending"? "orange" 
+   return status==="pending"? "orange":
+          status==="denied"? "red" 
           : "green"
 };
 
@@ -94,8 +123,11 @@ function budgetColor(status){
 
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date}</div>
-                        {/* <div className="budgetItem">{budget.expenseList[0].status}</div> */}
-                        <button style={{display:"none"}} onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button>
+                        <div style={{display:"flex", justifyContent:"space-between"}}>
+                        { false && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "approved")} className="budgetItem" style={{background:"red", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "approve" : ""}</div>}
+                        { false && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "denied")} className="budgetItem" style={{background:"red", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "reject" : ""}</div>}
+                        { false && <button style={{display: budget.expenseList[0].status==="pending"? "block": "none"}} onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button> }
+                        </div>
                     </div>
                 ))}
                 </section>

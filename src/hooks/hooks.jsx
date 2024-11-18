@@ -7,7 +7,7 @@ export const api = axios.create({
 
 export const getPost=(route)=> api.get(route);
 export const createPost=(route, data)=> api.post(route, data)
-export const upDatePost=(route, data)=> api.post(route, data)
+export const upDatePost=(route, data)=> api.put(route, data)
 export const deletePost=(routeWithParams)=> api.delete(routeWithParams)
 
 export const monthFormat ={
@@ -43,5 +43,6 @@ export const clearLocalStorage =(key)=> localStorage.clear(key)
 export function formatNumber(number) {
   return new Intl.NumberFormat('en-US').format(number);
 };
+
 
 
