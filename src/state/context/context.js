@@ -8,6 +8,7 @@ const StateContext = createContext();
 export const MyContext = ({children}) => {
     const location = useLocation()
     const [user, setUser]=useState();
+    const [reqId , setReqId]=useState("")
     //
     useEffect(()=>{
        setUser(hooks.getItemLocalStorage('user'))
@@ -18,6 +19,8 @@ export const MyContext = ({children}) => {
     value={{
         user,
         setUser,
+        reqId,
+        setReqId,
     }}>
         {children}     
     </StateContext.Provider>

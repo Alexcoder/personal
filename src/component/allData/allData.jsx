@@ -6,8 +6,7 @@ import "./allData.css"
 const AllData = () => {
     const [datafromDB, setDatafromDB] = useState([])
     const [loading, setLoading] = useState(false);
-    const {user} = useGlobalState();
-    // const [request, setRequest]=useState({})
+    const {user, reqId, setReqId} = useGlobalState();
     console.log("datafromDB", datafromDB)
 
     useEffect(()=>{
@@ -20,7 +19,7 @@ const AllData = () => {
           }catch(err){ throw(err)}
       }
       fetchData()
-  },[]);
+  },[reqId]);
 
   const deleteItem=async(id)=>{
     try{
@@ -33,9 +32,8 @@ const AllData = () => {
   }
   const deleteBudget=async(id,budgetId)=>{
     try{
-            await hooks.deletePost(`/houseTracker/deleteBudget/${id}/${budgetId}`)
-            // const findIndex = datafromDB.findIndex(item=> item._id===id)
-            // setDatafromDB(datafromDB.splice(findIndex, 0))
+           await hooks.deletePost(`/houseTracker/deleteBudget/${id}/${budgetId}`);
+           setReqId(id)
     }catch(err){
         throw(err)
     }
