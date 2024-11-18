@@ -7,7 +7,14 @@ const AddExpense = ({request, setRequest, formData, handleChange, handleClick}) 
   return (
     <div>
         <Select 
-           data={["Clothing", "Shoe", "Groceries","Transport", "Food", "HealthCare", "Miscellaneous"]}
+           data={[
+             "Transport", "Food", "HealthCare", 
+             "Data","Dstv", "Netflix", "Security",
+             "LightBill", "Water","Security",
+             "House Rent",
+             "Clothing", "Shoe", "Groceries",
+            "Others"
+          ]}
            name={"purpose"}
            value={request.purpose}
            placeholder={request.purpose}
