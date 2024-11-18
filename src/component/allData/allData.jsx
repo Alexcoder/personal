@@ -79,7 +79,7 @@ const handleApprove=async(postId, expenseId, expenseList, status)=>{
             date          : hooks.formatDate.fullDate(),
             
             expenseId : expenseId,
-            approve   : status
+            status   : status
     
         }
        const res = await hooks.upDatePost(`/houseTracker/update/${postId}`, initialState)
