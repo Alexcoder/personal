@@ -64,10 +64,10 @@ const sum =(month, year)=>{
 
 
 return  (
-    <div style={{display:"flex", justifyContent:"space-between"}}>
+    <div style={{display:"flex", justifyContent:"space-between", padding:"10px 5px"}}>
     <div>NGN {hooks.formatNumber(amountRequired)}</div>    
     <div style={{color:"green"}}>NGN {hooks.formatNumber(amountApproved)}</div>    
-    <div style={{color:"yellow"}}>NGN {hooks.formatNumber(amountPending)}</div>    
+    <div style={{color:"orange"}}>NGN {hooks.formatNumber(amountPending)}</div>    
     </div>
 )
 };
@@ -116,7 +116,7 @@ function budgetColor(status){
             <div key={item?._id} className="mapCont">
                 <button
                 disabled={true}
-                style={{float: "right", backgroundColor:"darkred", border:"none", color:"white"}}
+                style={{display:"none", float: "right", backgroundColor:"darkred", border:"none", color:"white"}}
                 onClick={()=> deleteItem(item?._id)}
                 className="item">X</button>
                 <div><strong className="item" style={{textTransform:"uppercase",display:"flex", justifyContent:"center", background:"lightgray", padding:"5px"}}>{item.month}  {item.year}</strong></div>
