@@ -65,8 +65,8 @@ const sum =(month, year)=>{
 
 return  (
     <div style={{display:"flex", justifyContent:"space-between", padding:"10px 5px"}}>
-    <div>NGN {hooks.formatNumber(amountRequired)}</div>    
     <div style={{color:"green"}}>NGN {hooks.formatNumber(amountApproved)}</div>    
+    <div style={{fontSize:"18px"}}>NGN {hooks.formatNumber(amountRequired)}</div>    
     <div style={{color:"orange"}}>NGN {hooks.formatNumber(amountPending)}</div>    
     </div>
 )
