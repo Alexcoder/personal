@@ -57,11 +57,18 @@ const sum =(month, year)=>{
     const expenseList = amount.map(item=>(
         item.expenseList
     )).flat();
+    const filterApproved = expenseList.filter(expenseList=> expenseList.status.includes("approved"))
     const amountRequired = expenseList.reduce((acc, value)=>(acc + value.amountRequired),0)
+    const amountApproved = filterApproved.reduce((acc, value)=>(acc + value.amountRequired),0)
+    const amountPending = amountRequired-amountApproved
 
 
 return  (
+    <div style={{display:"flex", justifyContent:"space-between"}}>
     <div>NGN {hooks.formatNumber(amountRequired)}</div>    
+    <div style={{color:"green"}}>NGN {hooks.formatNumber(amountApproved)}</div>    
+    <div style={{color:"yellow"}}>NGN {hooks.formatNumber(amountPending)}</div>    
+    </div>
 )
 };
 
@@ -112,7 +119,7 @@ function budgetColor(status){
                 style={{float: "right", backgroundColor:"darkred", border:"none", color:"white"}}
                 onClick={()=> deleteItem(item?._id)}
                 className="item">X</button>
-                <div><strong className="item" style={{textTransform:"uppercase"}}>{item.month}  {item.year}</strong></div>
+                <div><strong className="item" style={{textTransform:"uppercase",display:"flex", justifyContent:"center", background:"lightgray", padding:"5px"}}>{item.month}  {item.year}</strong></div>
                 <div><strong className="item">{sum(item.month, item.year)}</strong></div>
                 <section className='budgetWrapper'>
                 {item?.budget.map(budget=>(
