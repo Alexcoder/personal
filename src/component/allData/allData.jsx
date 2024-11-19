@@ -76,19 +76,20 @@ const handleApprove=async(postId, expenseId, expenseList, status)=>{
    try{
         const initialState={
             creator       : user?._id,
+            username      : user?.username,
+            email         : user?.email,
             firstName     : user?.firstName,
             lastName      : user?.lastName,
-            purpose       : expenseList?.purpose,
+
             
             detail        : expenseList.detail,
-            amountRequired: expenseList.amountRequired,
-            month         : hooks.formatDate.month ,
-            year          : hooks.formatDate.year ,
+            purpose       : expenseList?.purpose,
+            amount        : expenseList.amount,
             date          : hooks.formatDate.fullDate(),
             
-            expenseId : expenseId,
-            status   : status
-    
+            expenseId     : expenseId,
+            status        : status,
+            user          : user
         }
        const res = await hooks.upDatePost(`/houseTracker/update/${postId}`, initialState)
        console.log("res", res?.data)
@@ -127,12 +128,12 @@ function budgetColor(status){
                     style={{backgroundColor: budgetColor(budget.expenseList[0].status)}}
                     >
                         <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budget.expenseList[0].purpose}</div>
-                        <div className="budgetItem" style={{fontSize:"14px", fontStyle:"italic"}}>{budget.expenseList[0].detail}</div>
+                        {/* <div className="budgetItem" style={{fontSize:"14px", fontStyle:"italic"}}>{budget.expenseList[0].detail}</div> */}
                         <div className="budgetItem" style={{fontSize:"14px"}}>{budget.expenseList[0].firstName}</div>
 
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
-                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date}</div>
-                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].email.slice(0,12)}...</div>
+                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date.slice(0,6)}...</div>
+                        {/* <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].email.slice(0,12)}...</div> */}
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].username}</div>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
                         { true && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "approved")} className="budgetItem" style={{background:"white",color:"black", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "confirm" : ""}</div>}
