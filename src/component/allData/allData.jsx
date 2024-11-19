@@ -132,7 +132,7 @@ function budgetColor(status){
                         <div className="budgetItem" style={{fontSize:"14px"}}>{budget.expenseList[0].firstName}</div>
 
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
-                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date.slice(0,7)}...</div>
+                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date.slice(0,10)}...</div>
                         {/* <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].email.slice(0,12)}...</div> */}
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].username}</div>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
