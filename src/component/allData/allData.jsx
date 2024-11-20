@@ -140,7 +140,7 @@ function budgetColor(status){
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].username}</div>
                         <div style={{display:"flex",gap:"4px", justifyContent:"space-between"}}>
                         { true && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "approved")} className="budgetItem" style={{background:"white",color:"black", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "confirm" : ""}</div>}
-                        { false && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "denied")} className="budgetItem" style={{background:"red", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "reject" : ""}</div>}
+                        { true && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "denied")} className="budgetItem" style={{background:"red", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "reject" : ""}</div>}
                         { <button style={{display: budget.expenseList[0].status==="pending"? "block": "none"}} onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button> }
                         </div>
                     {/* </section> */}

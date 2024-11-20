@@ -20,8 +20,9 @@ const Navbar = () => {
       </div>
      <div className='nav-btn-cont' style={{}}>
         {user && <button className='btn' onClick={()=> navigate("/allData")}>View</button>}
-        {user && <button className='btn' onClick={()=> {hooks.clearLocalStorage("user") ; navigate("/auth"); setUser("")}}>Logout</button>}
         {user && <button className='btn' onClick={()=> navigate("/")}>Add</button>}
+        {user && <div className='nav-name' >{user?.firstName}</div>}
+        {user && <button className='btn' onClick={()=> {hooks.clearLocalStorage("user") ; navigate("/auth"); setUser("")}}>Logout</button>}
      </div>
 
     </main>

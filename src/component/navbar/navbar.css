@@ -2,6 +2,10 @@
 .nav-cont{
     padding-top: 0;
 }
+.nav-name{
+    font-size: larger;
+    font-weight: 500;
+}
 .nav-time-wrap{
     display: flex; 
     justify-content: space-around; 
