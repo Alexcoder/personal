@@ -125,7 +125,7 @@ function budgetColor(status){
                 <div><strong className="item" style={{textTransform:"uppercase",display:"flex", justifyContent:"center", background:"lightgray", padding:"5px"}}>{item.month}  {item.year}</strong></div>
                 <div><strong className="item">{sum(item.month, item.year)}</strong></div>
                 <section className='budgetWrapper'>
-                {item?.budget.map(budget=>(
+                {item?.budget.reverse().map(budget=>(
                     <div key={budget?._id} className="budget" 
                     style={{backgroundColor: budgetColor(budget.expenseList[0].status)}}
                     >
@@ -141,7 +141,7 @@ function budgetColor(status){
                         <div style={{display:"flex",gap:"4px", justifyContent:"space-between"}}>
                         { true && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "approved")} className="budgetItem" style={{background:"white",color:"black", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "confirm" : ""}</div>}
                         { false && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "denied")} className="budgetItem" style={{background:"red", width:"fit-content", fontSize:"10px", padding:"1px 2px", cursor:"pointer", display: budget.expenseList[0].status==="pending"? "block" : "none"}}>{budget.expenseList[0].status? "reject" : ""}</div>}
-                        { true && <button style={{display: budget.expenseList[0].status==="pending"? "block": "none"}} onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button> }
+                        { <button style={{display: budget.expenseList[0].status==="pending"? "block": "none"}} onClick={()=> deleteBudget(item?._id, budget?._id)} className="item">X</button> }
                         </div>
                     </section>
                     </div>
