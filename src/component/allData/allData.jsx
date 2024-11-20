@@ -80,6 +80,8 @@ const handleApprove=async(postId, expenseId, expenseList, status)=>{
             email         : user?.email,
             firstName     : user?.firstName,
             lastName      : user?.lastName,
+            requestor     : expenseList.creator,
+            itemId        : expenseList._id, 
 
             
             detail        : expenseList.detail,
@@ -89,7 +91,7 @@ const handleApprove=async(postId, expenseId, expenseList, status)=>{
             
             expenseId     : expenseId,
             status        : status,
-            user          : user
+            // user          : user
         }
        const res = await hooks.upDatePost(`/houseTracker/update/${postId}`, initialState)
        console.log("res", res?.data)
@@ -128,11 +130,10 @@ function budgetColor(status){
                     style={{backgroundColor: budgetColor(budget.expenseList[0].status)}}
                     >
                         <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budget.expenseList[0].purpose}</div>
-                        {/* <div className="budgetItem" style={{fontSize:"14px", fontStyle:"italic"}}>{budget.expenseList[0].detail}</div> */}
-                        <div className="budgetItem" style={{fontSize:"14px"}}>{budget.expenseList[0].firstName}</div>
+                        <div className="budgetItem" style={{fontSize:"14px", fontStyle:"italic"}}>{budget.expenseList[0].detail.slice(0,10)}...</div>
 
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
-                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date.slice(0,6)}</div>
+                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].firstName} {budget.expenseList[0].date.slice(0,6)} </div>
                         {/* <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].email.slice(0,12)}...</div> */}
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].username}</div>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
