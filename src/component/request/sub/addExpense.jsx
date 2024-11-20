@@ -8,10 +8,10 @@ const AddExpense = ({request, setRequest, formData, handleChange, handleClick}) 
     <div>
         <Select 
            data={[
-             "Transport", "Food", "HealthCare", 
+             "Food", "HealthCare", "Transport",
              "Data","Dstv", "Netflix", "Security",
              "LightBill", "Water","Security",
-             "House Rent",
+             "House Rent", "Church", "Family Support",
              "Clothing", "Shoe", "Groceries",
             "Others"
           ]}

@@ -37,8 +37,8 @@ function Request (){
     const [datafromDB, setDatafromDB] = useState([]);
 
     const formData=[
-        { title: "Detail", name: "detail", value: request.detail,},
-        { title: "Amount", name: "amountRequired", value: request.amountRequired,},
+      { title: "Amount", name: "amountRequired", value: request.amountRequired,},
+      { title: "Detail", name: "detail", value: request.detail,},
     ];
 
     const handleChange =(e)=>{
@@ -68,8 +68,6 @@ function Request (){
             throw(err)          
         }
     };
-    // console.log(request)
-    // console.log("datafromDB", datafromDB)
 
   return (
     <div className="request-cont">
