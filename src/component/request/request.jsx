@@ -37,7 +37,7 @@ function Request (){
     const [datafromDB, setDatafromDB] = useState([]);
 
     const formData=[
-      { title: "Amount", name: "amountRequired", value: request.amountRequired,},
+      { title: "NGN", name: "amountRequired", value: request.amountRequired,},
       { title: "Detail", name: "detail", value: request.detail,},
     ];
 
