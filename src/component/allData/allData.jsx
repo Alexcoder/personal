@@ -114,7 +114,7 @@ function budgetColor(status){
 
   return (
     <div className='allData' style={{width:"98vw"}}>
-        {loading ? "page loading...": !datafromDB? "No Data Found": ""}
+        {loading ? "page loading...": datafromDB.length<1? "No Data Found": ""}
         {datafromDB?.map((item)=>(
             <div key={item?._id} className="mapCont">
                 <button

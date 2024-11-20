@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: "http://localhost:8000/api"
-    // baseURL: "https://personal-api-amc2.onrender.com/api"
+    // baseURL: "http://localhost:8000/api"
+    baseURL: "https://personal-api-amc2.onrender.com/api"
 });
 
 export const getPost=(route)=> api.get(route);
