@@ -8,7 +8,7 @@ import { useGlobalState } from '../../state/context/context';
 const Navbar = () => {
     const navigate = useNavigate();
     const {user, setUser} = useGlobalState();
-    const desig = (hooks.formatDate.time).slice(0,2) < Number(12) ? "AM" 
+    const desig = Number((hooks.formatDate.time).slice(0,3)) < Number(12) ? "AM" 
     : "PM"
 
   return (
