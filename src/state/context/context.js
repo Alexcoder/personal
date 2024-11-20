@@ -7,7 +7,7 @@ const StateContext = createContext();
 
 export const MyContext = ({children}) => {
     const location = useLocation()
-    const [user, setUser]=useState();
+    const [user, setUser] = useState(hooks.getItemLocalStorage("user"));
     const [reqId , setReqId]=useState("");
     const [loading, setLoading] = useState(false);
 
@@ -15,6 +15,7 @@ export const MyContext = ({children}) => {
     useEffect(()=>{
        setUser(hooks.getItemLocalStorage('user'))
     },[location]);
+  
 //
   return (
     <StateContext.Provider
