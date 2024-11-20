@@ -3,7 +3,7 @@ import Select from '../../../reusableComponent/select/select'
 import Input from '../../../reusableComponent/input/input'
 import Button from '../../../reusableComponent/button/button'
 
-const AddExpense = ({request, setRequest, formData, handleChange, handleClick}) => {
+const AddExpense = ({request, setRequest, formData, handleChange, handleClick, isClicked, setIsClicked}) => {
   return (
     <div>
         <Select 
@@ -19,7 +19,7 @@ const AddExpense = ({request, setRequest, formData, handleChange, handleClick}) 
            name={"purpose"}
            value={request.purpose}
            placeholder={request.purpose}
-           onClick={(item)=> setRequest(prev=> ({...prev, purpose: item}))}        
+           onClick={(item)=> {setRequest(prev=> ({...prev, purpose: item})); }}        
         />
         {
         formData.map((item,i)=>(
@@ -32,7 +32,7 @@ const AddExpense = ({request, setRequest, formData, handleChange, handleClick}) 
                 onChange={handleChange}
             />))
         }
-      <Button disabled={(request.purpose==="")} title={"Submit"} onClick={()=> handleClick()}/>
+     { !isClicked && <Button disabled={isClicked} title={"Submit"} onClick={()=>{ handleClick(); setIsClicked(prev=>!prev)}}/>}
 
 
       

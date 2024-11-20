@@ -1,23 +1,19 @@
-import { useEffect, useState, } from 'react'
+import { useState, } from 'react'
 import AddExpense from './sub/addExpense'
 import ShowTracker from './sub/showTracker';
 // import { useDispatch } from 'react-redux'
-import * as Hooks from "../../hooks/hooks"
-import { useLocation, useNavigate } from 'react-router-dom';
+import * as hooks from "../../hooks/hooks"
+import { useNavigate } from 'react-router-dom';
+import { useGlobalState } from '../../state/context/context';
 
 
 function Request (){
     // const dispatch = useDispatch()
     const navigate = useNavigate()
-    const location = useLocation()
-    const [user, setUser]= useState(Hooks.getItemLocalStorage("user"))
+    const { user, setUser } = useGlobalState()
 
     
-    useEffect(()=>{
-      setUser(Hooks.getItemLocalStorage("user"))
-    },[location])
     
-    // console.log("user", user)
 
     const initialState={
         creator: user?._id,
@@ -28,12 +24,13 @@ function Request (){
         purpose: "Select",
         detail:"",
         amountRequired: "",
-        month: Hooks.formatDate.month ,
-        year: Hooks.formatDate.year ,
-        date: Hooks.formatDate.fullDate()
+        month: hooks.formatDate.month ,
+        year: hooks.formatDate.year ,
+        date: hooks.formatDate.fullDate()
     }
 
     const [request, setRequest]=useState(initialState)
+    const [isClicked, setIsClicked]=useState(false)
     const [datafromDB, setDatafromDB] = useState([]);
 
     const formData=[
@@ -57,10 +54,10 @@ function Request (){
             alert("Input amount to continue")
             return
           }else{
-            const res = await Hooks.createPost("/houseTracker/createRequest", {...request, type: "todo"})
+            const res = await hooks.createPost("/houseTracker/createRequest", {...request, type: "todo"})
             setRequest(initialState)
             setDatafromDB([...datafromDB, res?.data])
-            setUser(Hooks.getItemLocalStorage("user"))
+            setUser(hooks.getItemLocalStorage("user"))
             navigate("/allData")
           }
 
@@ -75,6 +72,8 @@ function Request (){
         < AddExpense 
           request={request}
           setRequest={setRequest}
+          isClicked={isClicked}
+          setIsClicked={setIsClicked}
           formData={formData}
           handleChange={handleChange}
           handleClick={handleClick}/>  
