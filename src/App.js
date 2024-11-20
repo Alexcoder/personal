@@ -35,7 +35,7 @@ function App() {
       >
         <div style={{display:"flex", justifyContent:"space-around", paddingBottom:"10px"}}>
          <strong>{hooks.formatDate.weekDay}</strong>
-         <div>{hooks.formatDate.time} {desig}</div>
+         <div>{hooks.formatDate.time.slice(0,6)} {desig}</div>
          <div>{hooks.formatDate.date} {hooks.formatDate.month}</div>
         </div>
      <div className='btn-cont' style={{position:"fixed", top:"0", left:"0", right:"0", backgroundColor:"white", padding:"6px"}}>
