@@ -111,7 +111,7 @@ function budgetColor(status){
 };
 
   return (
-    <div className='allData' style={{width:"100vw"}}>
+    <div className='allData' style={{width:"98vw"}}>
         {loading ? "page loading...": !datafromDB? "No Data Found": ""}
         {datafromDB?.map((item)=>(
             <div key={item?._id} className="mapCont">
@@ -132,7 +132,7 @@ function budgetColor(status){
                         <div className="budgetItem" style={{fontSize:"14px"}}>{budget.expenseList[0].firstName}</div>
 
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
-                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date.slice(0,10)}...</div>
+                        <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].date.slice(0,6)}</div>
                         {/* <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].email.slice(0,12)}...</div> */}
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].username}</div>
                         <div style={{display:"flex", justifyContent:"space-between"}}>
