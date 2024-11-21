@@ -5,19 +5,42 @@
     background-color: aliceblue;
     padding: 4px;
     border-radius: 2px;
+   
+}
+.budgetWrapper{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    max-height: 450px;
+    overflow: auto;
 }
 .budget{
     background-color: orange;
     color: white;
     padding: 6px;
     margin-bottom: 4px;
-    border-radius: 2px;
+    border-radius: 2px;   
 }
-.budgetWrapper{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
+.delete-btn{
+    display: none;
+    float: right; background-color:darkred; border:none;
+    color: white   
 }
-.budgetItem{
-    /* min-width: 105px; */
+.month-year{
+    text-transform: uppercase;display:flex; justify-content:center; background:lightgray; 
+    padding: 5px   
+}
+.approve-btn{
+    background:white;color: black; width: fit-content; font-size: 10px; padding: 1px 3px; cursor: pointer;   
+}
+.reject-btn{
+    background: red;color: white; width: fit-content; font-size: 10px; padding: 1px 3px; cursor: pointer;   
+}
+.elevate{
+ box-shadow: 1px 1px 0px 0.6px gray; 
+ border-radius: 4px;  
+}
+.delete-budget-btn{
+   outline: none;
+   border: none; 
 }
