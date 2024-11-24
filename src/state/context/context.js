@@ -10,12 +10,16 @@ export const MyContext = ({children}) => {
     const [user, setUser] = useState(hooks.getItemLocalStorage("user"));
     const [reqId , setReqId]=useState("");
     const [loading, setLoading] = useState(false);
+    const[groupId, setGroupId] = useState("")
+    const[errorMessage, setErrorMessage] = useState("")
+    const[successMessage, setSuccessMessage] = useState("")
 
     //
     useEffect(()=>{
        setUser(hooks.getItemLocalStorage('user'))
     },[location]);
-  
+
+    
 //
   return (
     <StateContext.Provider
@@ -26,6 +30,12 @@ export const MyContext = ({children}) => {
         setReqId,
         loading,
         setLoading,
+        groupId,
+        setGroupId,
+        errorMessage,
+        setErrorMessage,
+        successMessage, 
+        setSuccessMessage,
     }}>
         {children}     
     </StateContext.Provider>

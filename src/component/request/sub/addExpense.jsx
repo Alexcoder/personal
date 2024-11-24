@@ -2,6 +2,7 @@ import React from 'react'
 import Select from '../../../reusableComponent/select/select'
 import Input from '../../../reusableComponent/input/input'
 import Button from '../../../reusableComponent/button/button'
+// import { useGlobalState } from '../../../state/context/context'
 
 const AddExpense = ({request, setRequest, formData, handleChange, handleClick, isClicked, setIsClicked}) => {
   return (
@@ -19,7 +20,7 @@ const AddExpense = ({request, setRequest, formData, handleChange, handleClick, i
            name={"purpose"}
            value={request.purpose}
            placeholder={request.purpose}
-           onClick={(item)=> {setRequest(prev=> ({...prev, purpose: item})); }}        
+           onClick={(item)=> {setRequest(prev=> ({...prev, purpose: item}));  }}        
         />
         {
         formData.map((item,i)=>(

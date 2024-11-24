@@ -123,6 +123,7 @@ function budgetColor(status){
                  onClick={()=> deleteItem(item?._id)}>
                     X
                 </button>
+                {/* <div>{item?._id}</div> */}
                 <div><strong className="month-year"
                 >{item.month}  {item.year}</strong></div>
                 <div><strong className="item">{sum(item.month, item.year)}</strong></div>
@@ -138,7 +139,6 @@ function budgetColor(status){
 
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].firstName} {budget.expenseList[0].date.slice(0,6)} </div>
-                        {/* <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].email.slice(0,12)}...</div> */}
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].username}</div>
                         <div style={{display:"flex",gap:"4px", justifyContent:"space-between"}}>
                         { user?.email==="mogaleza@gmail.com" && <div onClick={()=> handleApprove(item?._id, budget.expenseList[0]._id, budget.expenseList[0], "approved")} className="approve-btn elevate"

@@ -10,7 +10,7 @@ import { useGlobalState } from '../../state/context/context';
 function Request (){
     // const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { user, setUser } = useGlobalState()
+    const { user, setUser, groupId } = useGlobalState()
 
     
     
@@ -54,7 +54,7 @@ function Request (){
             alert("Input amount to continue")
             return
           }else{
-            const res = await hooks.createPost("/houseTracker/createRequest", {...request, type: "todo"})
+            const res = await hooks.createPost("/houseTracker/createRequest", {...request, groupId})
             setRequest(initialState)
             setDatafromDB([...datafromDB, res?.data])
             setUser(hooks.getItemLocalStorage("user"))

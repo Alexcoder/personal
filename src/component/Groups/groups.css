@@ -1,0 +1,27 @@
+.grp-map-cont{
+    display: flex;
+    gap: 2px;
+    justify-content: space-between;
+    padding: 4px 2px;
+    width: 60vw;
+}
+.grp-item-logo{
+    border-radius: 50% ;
+    background-color: aqua;
+    padding:4px 8px;
+    font-weight: 600;
+}
+.grp-item{
+    padding:4px 8px;
+    font-weight: 600;
+    color: black
+    
+}
+.grp-map-sub{
+    width: auto;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    padding: 4px;
+    border-radius: 3px;
+}
