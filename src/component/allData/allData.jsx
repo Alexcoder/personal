@@ -194,13 +194,13 @@ const check=(budgetDetail)=>{
                 <div style={{float:"right", marginLeft:"10px"}}>
                 <button onClick={()=> setFullPost(prev=> !prev)}>X</button>
                 </div>
-                 <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budgetItem.purpose}</div>
+                 <div className="budgetItem" style={{fontSize:"16px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budgetItem.purpose}</div>
                  <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{ budgetItem.detail}</div>
                  
-                 <div className="budgetItem" style={{fontSize:"15px", marginTop:"8px"}}>NGN {hooks.formatNumber(budgetItem.amountRequired)}</div>
-                 <div className="budgetItem" style={{fontSize:"12px"}}>{budgetItem.firstName} {budgetItem.lastName} </div>
-                 <div className="budgetItem" style={{fontSize:"12px"}}>{budgetItem.date} </div>
-                 <div className="budgetItem" style={{fontSize:"12px"}}>{budgetItem.username}</div>
+                 <div className="budgetItem" style={{fontSize:"16px", marginTop:"8px"}}>NGN {hooks.formatNumber(budgetItem.amountRequired)}</div>
+                 <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.firstName} {budgetItem.lastName} </div>
+                 <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.date} </div>
+                 <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.username}</div>
 
                  <div style={{display:"flex",gap:"40px", justifyContent:"space-between", paddingTop:"15px"}}>
                         { user?.email==="mogaleza@gmail.com" && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem._id, budgetItem, "approved")}} className="approve-btn elevate"
