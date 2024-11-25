@@ -1,12 +1,15 @@
 import {useState} from 'react'
 import Input from '../reusableComponent/input/input';
 import Button from '../reusableComponent/button/button';
+import { useGlobalState } from '../state/context/context';
+import Notification from '../reusableComponent/notification/notification';
 import * as Hooks from "../hooks/hooks"
 import "./auth.css"
 import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
     const navigate = useNavigate()
+    const { setNotification } = useGlobalState()
     const initialState={
         email : "",
         password:"",
@@ -40,10 +43,13 @@ const Auth = () => {
           setRequest(initialState)
           Hooks.setItemLocalStorage("user", res?.data)
           setRequest(initialState)
-          setLoading(prev=> !prev)
+          setLoading(false)
           navigate("/allData")
         }catch(err){
-            setErrorMessage(err.response)          
+            setLoading(true)
+            setNotification(true)
+            setErrorMessage(err?.response.data)  
+            setLoading(false)        
         }
     };
 
@@ -78,14 +84,17 @@ const Auth = () => {
         <div style={{fontSize:"12px", color:"darkRed", fontWeight:"600"}}>{errorMessage?.data}</div>
      {
      <Button 
-        bc={loading && "lightgray"}
+        bc={loading ? "lightgray" : "purple"}
         color={loading && "black"}
         disabled={loading} 
-        title={loading? <div style={{fontStyle:"italic"}}>processing ...</div> : newUser? "Create Account" :"Login"} 
+        title={ newUser? "Create Account" :"Login"} 
         onClick={()=> check()}/>
      }
 
-   
+      <Notification
+      message={errorMessage}
+      onClick={()=> {}}
+       />   
     </div>
   )
 }

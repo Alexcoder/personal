@@ -13,6 +13,7 @@ export const MyContext = ({children}) => {
     const[groupId, setGroupId] = useState("")
     const[errorMessage, setErrorMessage] = useState("")
     const[successMessage, setSuccessMessage] = useState("")
+    const[notification, setNotification] = useState(false)
 
     //
     useEffect(()=>{
@@ -36,6 +37,8 @@ export const MyContext = ({children}) => {
         setErrorMessage,
         successMessage, 
         setSuccessMessage,
+        notification, 
+        setNotification,
     }}>
         {children}     
     </StateContext.Provider>
