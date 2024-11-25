@@ -186,7 +186,7 @@ const check=(budgetDetail)=>{
 
                 color:"white",
                 // width : "fit",
-                padding: "20px",
+                padding: "10px",
                 borderRadius: "2px",
                 // textAlign: "center",
                 gap:"4px"
