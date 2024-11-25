@@ -43,13 +43,12 @@ const Auth = () => {
           setRequest(initialState)
           Hooks.setItemLocalStorage("user", res?.data)
           setRequest(initialState)
-          setLoading(false)
+          setLoading(prev=> !prev)
           navigate("/allData")
         }catch(err){
-            setLoading(true)
             setNotification(true)
             setErrorMessage(err?.response.data)  
-            setLoading(false)        
+            setLoading(prev=> !prev)        
         }
     };
 
@@ -62,7 +61,6 @@ const Auth = () => {
     }
 
  const formLength= newUser? formData.length : 2;
- console.log("errorMessage", errorMessage)
 
   return (
     <div className='auth-cont'>
@@ -87,7 +85,7 @@ const Auth = () => {
         bc={loading ? "lightgray" : "purple"}
         color={loading && "black"}
         disabled={loading} 
-        title={ newUser? "Create Account" :"Login"} 
+        title={loading? <div style={{fontStyle: "italic"}}>processing...</div>: newUser? "Create Account" :"Login"} 
         onClick={()=> check()}/>
      }
 
