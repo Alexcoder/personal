@@ -158,7 +158,7 @@ const check=(budgetDetail)=>{
                     {/* <section style={{display:"flex", justifyContent:"space-between"}}> */}
 
                         <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budget.expenseList[0].purpose}</div>
-                        <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{budget.expenseList[0].detail.slice(0,13)}{check(budget.expenseList[0].detail)}</div>
+                        <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{budget.expenseList[0].detail.slice(0,12)}{check(budget.expenseList[0].detail)}</div>
 
                         <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(budget.expenseList[0].amountRequired)}</div>
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].firstName} {budget.expenseList[0].date.slice(0,6)} </div>
