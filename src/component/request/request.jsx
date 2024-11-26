@@ -3,13 +3,14 @@ import AddExpense from './sub/addExpense'
 import ShowTracker from './sub/showTracker';
 // import { useDispatch } from 'react-redux'
 import * as hooks from "../../hooks/hooks"
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from '../../state/context/context';
+import "./request.css"
 
 
 function Request (){
     // const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const { user, setUser, groupId } = useGlobalState()
 
     
@@ -58,7 +59,7 @@ function Request (){
             setRequest(initialState)
             setDatafromDB([...datafromDB, res?.data])
             setUser(hooks.getItemLocalStorage("user"))
-            navigate("/allData")
+            // navigate("/allData")
           }
 
         }catch(err){

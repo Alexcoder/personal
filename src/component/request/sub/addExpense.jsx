@@ -2,9 +2,10 @@ import React from 'react'
 import Select from '../../../reusableComponent/select/select'
 import Input from '../../../reusableComponent/input/input'
 import Button from '../../../reusableComponent/button/button'
-// import { useGlobalState } from '../../../state/context/context'
+import { useGlobalState } from '../../../state/context/context'
 
 const AddExpense = ({request, setRequest, formData, handleChange, handleClick, isClicked, setIsClicked}) => {
+  const { setAddRequest } = useGlobalState();
   return (
     <div>
         <Select 
@@ -33,7 +34,7 @@ const AddExpense = ({request, setRequest, formData, handleChange, handleClick, i
                 onChange={handleChange}
             />))
         }
-     { !isClicked && <Button disabled={isClicked} title={"Submit"} onClick={()=>{ handleClick(); setIsClicked(prev=>!prev)}}/>}
+     { !isClicked && <Button disabled={isClicked} title={"Submit"} onClick={()=>{ handleClick(); setIsClicked(prev=>!prev); setAddRequest(prev=> !prev)}}/>}
 
 
       

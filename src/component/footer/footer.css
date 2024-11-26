@@ -1,27 +1,25 @@
 
-.nav-cont{
+.footer-cont{
     padding-top: 0;
+    /* height: 10px; */
 }
-.nav-name{
-    font-size: 15px;
+.footer-name{
+    font-size: larger;
     font-weight: 500;
-    background-color: rgb(123, 14, 224);
-    color: white;
-    border-radius: 50%;
-    padding: 8px 6px;
 }
-.nav-time-wrap{
+.footer-time-wrap{
     display: flex; 
     justify-content: space-around; 
     padding-bottom: 10px
 }
-.nav-btn-cont{
+.footer-btn-cont{
     position: fixed; 
     z-index: 1000000;
-    top: 0;
+    /* top: 0; */
     left: 0; 
     right: 0;
-    background-color: lightgray;
+    bottom: 0;
+    background-color: rgb(163, 151, 151);
     padding: 2px;
     display: flex; 
     justify-content : space-between;

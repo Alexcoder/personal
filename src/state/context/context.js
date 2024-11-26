@@ -14,10 +14,24 @@ export const MyContext = ({children}) => {
     const[errorMessage, setErrorMessage] = useState("")
     const[successMessage, setSuccessMessage] = useState("")
     const[notification, setNotification] = useState(false)
+    const[addRequest, setAddRequest] = useState(false)
 
     //
+    // useEffect(()=>{
+    //     const fetchUser=async()=>{
+    //       try{
+    //        const res =  await hooks.getPost("/auth")
+    //        hooks.setItemLocalStorage(`user`, res?.data)
+    //        console.log("res.data", res?.data)
+    //       }catch(err){
+    //         throw(err)
+    //       }
+    //     }
+    //     fetchUser()
+    // },[reqId]);
+
     useEffect(()=>{
-       setUser(hooks.getItemLocalStorage('user'))
+      setUser(hooks.getItemLocalStorage('user'))
     },[location]);
 
     
@@ -39,6 +53,8 @@ export const MyContext = ({children}) => {
         setSuccessMessage,
         notification, 
         setNotification,
+        addRequest, 
+        setAddRequest
     }}>
         {children}     
     </StateContext.Provider>

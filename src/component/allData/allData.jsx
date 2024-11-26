@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import * as hooks from "../../hooks/hooks";
 import {useGlobalState} from "../../state/context/context"
+import Request from '../request/request';
 import "./allData.css"
 
 const AllData = () => {
@@ -9,7 +10,7 @@ const AllData = () => {
     const [budgetId, setBudgetId] = useState("");
     const [postItem, setPostItem] = useState("");
     const [fullPost, setFullPost] = useState(false);
-    const {user, reqId, setReqId, loading, setLoading} = useGlobalState();
+    const {user, reqId, setReqId, loading, setLoading, addRequest} = useGlobalState();
     console.log("datafromDB", datafromDB)
 
     useEffect(()=>{
@@ -212,6 +213,8 @@ const check=(budgetDetail)=>{
             </div>
         </section>
         }
+
+        { addRequest && <Request/>}
     </div>
   )
 }

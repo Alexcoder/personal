@@ -44,7 +44,7 @@ const Auth = () => {
           Hooks.setItemLocalStorage("user", res?.data)
           setRequest(initialState)
           setLoading(prev=> !prev)
-          navigate("/allData")
+          navigate("/")
         }catch(err){
             setNotification(true)
             setErrorMessage(err?.response.data)  

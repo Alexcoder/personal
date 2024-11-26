@@ -6,15 +6,14 @@ import "./groups.css";
 
 function Groups(){
     const {setGroupId, user, reqId} = useGlobalState();
-    const [dBGroups, setDBGroups] = useState([])
+    const [dBGroups, setDBGroups] = useState({})
 
     useEffect(()=>{
         const fetch=async()=>{
             try{
                 const res = await hooks.getPost(`/houseTracker/v1/${user?._id}`)
-                const resNew = Object.entries(res?.data)
-                setDBGroups(resNew)
-                console.log("db", res?.data)
+                setDBGroups({...res?.data})
+                console.log("res?.data", res?.data)
             }catch(err){
                 throw(err)
             }
@@ -26,10 +25,19 @@ function Groups(){
         setGroupId(id)
     }
 
+    console.log("user?.group", user?.group)
 
     return(
         <main className="groups">
-           { dBGroups?.map(([id, data])=>(
+           { user?.group.map((group)=>(
+            <div className="grp-map-cont" key={group}>
+                    <div className="grp-map-sub" onClick={()=> handleClick(group?.groupId)}>
+                        <div className="grp-item-logo">{dBGroups[group?.groupId]?._doc.groupName.slice(0,1)}</div>
+                        <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupName}</div>
+                    </div>    
+            </div>
+           ))}
+           {/* { dBGroups?.map(([id, data])=>(
             <div className="grp-map-cont" key={id}>
                 {
                   data.map(item=>(
@@ -40,7 +48,7 @@ function Groups(){
                   ))   
                 }
             </div>
-           ))}
+           ))} */}
 
         </main>
     )

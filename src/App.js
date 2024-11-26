@@ -2,10 +2,10 @@
 import './App.css';
 import HouseTracker from './component/houseTracker/houseTracker';
 import { Route, Routes, } from 'react-router-dom';
-import Request from './component/request/request';
 import Auth from './auth/auth';
 import AllData from "./component/allData/allData";
 import Navbar from './component/navbar/navbar';
+import Footer from './component/footer/footer';
 import { useGlobalState } from './state/context/context';
 import Groups from './component/Groups/groups';
 
@@ -29,14 +29,14 @@ function App() {
         {successMessage.length? "" : ""}
         <Navbar/> 
      <Routes>
-       <Route path="/" element={ ReRouteAuth(Request)}/>
-       <Route path="/auth" element={ !user && <Auth/>}/>
+       <Route path={"/"} element={ !user ? <Auth/> : ReRouteAuth(AllData) }/>
        <Route path="/budget"  element={ ReRouteAuth(HouseTracker)}/>
-       <Route path="/allData"  element={ ReRouteAuth(AllData)}/>
+       {/* <Route path={user?"/"}  element={ ReRouteAuth(AllData)}/> */}
        <Route path="/groups"  element={ ReRouteAuth(Groups)}/>
      </Routes>
      
 
+    <Footer/> 
     </div>
   );
 }
