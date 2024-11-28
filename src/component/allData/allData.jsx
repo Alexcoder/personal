@@ -3,6 +3,7 @@ import * as hooks from "../../hooks/hooks";
 import {useGlobalState} from "../../state/context/context"
 import Request from '../request/request';
 import "./allData.css"
+import useReactHooks from '../../hooks/reactHooks';
 
 const AllData = () => {
     const [datafromDB, setDatafromDB] = useState([])
@@ -11,6 +12,7 @@ const AllData = () => {
     const [postItem, setPostItem] = useState("");
     const [fullPost, setFullPost] = useState(false);
     const {user, reqId, setReqId, loading, setLoading, addRequest} = useGlobalState();
+    const reactHooks = useReactHooks()
     console.log("datafromDB", datafromDB)
 
     useEffect(()=>{
@@ -98,7 +100,7 @@ const handleApprove=async(postId, expenseId, expenseList, status)=>{
             status        : status,
             // user          : user
         }
-       const res = await hooks.upDatePost(`/houseTracker/update/${postId}`, initialState)
+       const res = await hooks.upDatePost(`/houseTracker/verifyStatus/${postId}`, initialState)
        console.log("res", res?.data)
        const findIndex =  datafromDB.findIndex(data=> data._id.toString(res?.data._id))
        const arr = [...datafromDB]
@@ -130,8 +132,12 @@ const check=(budgetDetail)=>{
     }else{
         return
     }
+};
 
+const setUpNewUser=()=>{
+    reactHooks.navigate(`/allUsers`)
 }
+
 
   return (
     <div className='allData'>
@@ -149,7 +155,7 @@ const check=(budgetDetail)=>{
                 >{item.month}  {item.year}</strong></div>
                 <div><strong className="item">{sum(item.month, item.year)}</strong></div>
                 <section className='budgetWrapper'>
-                {item?.budget.reverse().map(budget=>(
+                {item?.budget.map(budget=>(
                     <div 
                     key={budget?._id} 
                     className="budget" 
@@ -166,7 +172,7 @@ const check=(budgetDetail)=>{
                         <div className="budgetItem" style={{fontSize:"12px"}}>{budget.expenseList[0].username}</div>
                     {/* </section> */}
                     </div>
-                ))}
+                )).reverse()}
                 </section>
             </div>
         ))}
@@ -215,6 +221,17 @@ const check=(budgetDetail)=>{
         }
 
         { addRequest && <Request/>}
+        <div style={{}}>
+            <button 
+            onClick={()=> setUpNewUser()}
+            style={{
+                position:"fixed", top:"75px", left:"10px",
+                border:"none",
+                background:"darkred", color:"white",
+                fontSize:"14px",
+                padding:"8px", borderRadius:"2px"
+                 }}>Add Group Member </button>
+        </div>
     </div>
   )
 }

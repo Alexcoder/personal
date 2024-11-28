@@ -15,24 +15,25 @@ export const MyContext = ({children}) => {
     const[successMessage, setSuccessMessage] = useState("")
     const[notification, setNotification] = useState(false)
     const[addRequest, setAddRequest] = useState(false)
+    const[allUsers, setAllUsers] = useState([])
+    const[selectedId, setSelectedId] = useState(``)
 
-    //
-    // useEffect(()=>{
-    //     const fetchUser=async()=>{
-    //       try{
-    //        const res =  await hooks.getPost("/auth")
-    //        hooks.setItemLocalStorage(`user`, res?.data)
-    //        console.log("res.data", res?.data)
-    //       }catch(err){
-    //         throw(err)
-    //       }
-    //     }
-    //     fetchUser()
-    // },[reqId]);
+    
+    useEffect(()=>{
+        const fetchUserS=async()=>{
+          try{
+           const res =  await hooks.getPost("/auth")
+           setAllUsers(res?.data)
+          }catch(err){
+            throw(err)
+          }
+        }
+        fetchUserS()
+    },[reqId]);
 
     useEffect(()=>{
       setUser(hooks.getItemLocalStorage('user'))
-    },[location]);
+    },[location, reqId]);
 
     
 //
@@ -54,7 +55,11 @@ export const MyContext = ({children}) => {
         notification, 
         setNotification,
         addRequest, 
-        setAddRequest
+        setAddRequest,
+        allUsers, 
+        setAllUsers,
+        selectedId, 
+        setSelectedId
     }}>
         {children}     
     </StateContext.Provider>

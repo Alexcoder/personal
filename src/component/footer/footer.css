@@ -19,8 +19,17 @@
     left: 0; 
     right: 0;
     bottom: 0;
-    background-color: rgb(163, 151, 151);
-    padding: 2px;
+    background-color: rgba(100, 91, 91, 0.411);
+    padding: 4px 2px;
     display: flex; 
     justify-content : space-between;
+}
+.footer-btn{
+    padding: 8px;
+    background: rgb(114, 8, 8);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 300;
 }

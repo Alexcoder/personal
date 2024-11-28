@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
     const navigate = useNavigate()
-    const { setNotification } = useGlobalState()
+    const { setNotification, setReqId } = useGlobalState()
     const initialState={
         email : "",
         password:"",
@@ -44,6 +44,7 @@ const Auth = () => {
           Hooks.setItemLocalStorage("user", res?.data)
           setRequest(initialState)
           setLoading(prev=> !prev)
+          setReqId(res?.data._id)
           navigate("/")
         }catch(err){
             setNotification(true)

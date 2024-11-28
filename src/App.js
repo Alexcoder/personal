@@ -8,6 +8,7 @@ import Navbar from './component/navbar/navbar';
 import Footer from './component/footer/footer';
 import { useGlobalState } from './state/context/context';
 import Groups from './component/Groups/groups';
+import AllUsers from './component/allUsers/allUsers';
 
 function App() {
   const { user, successMessage } = useGlobalState()
@@ -33,6 +34,7 @@ function App() {
        <Route path="/budget"  element={ ReRouteAuth(HouseTracker)}/>
        {/* <Route path={user?"/"}  element={ ReRouteAuth(AllData)}/> */}
        <Route path="/groups"  element={ ReRouteAuth(Groups)}/>
+       <Route path="/allUsers"  element={ ReRouteAuth(AllUsers)}/>
      </Routes>
      
 
