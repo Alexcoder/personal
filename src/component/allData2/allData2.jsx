@@ -30,7 +30,7 @@ const AllData = () => {
   const deleteItem=async(id)=>{
     try{
             setLoading(true)
-            await hooks.deletePost(`/houseTracker/delete/${id}`)
+            await hooks.deletePost(`/houseTrackerV1/delete/${id}`)
             const findIndex = datafromDB.findIndex(item=> item._id===id)
             setDatafromDB(datafromDB.splice(findIndex, 0))
             setLoading(false)
@@ -41,7 +41,7 @@ const AllData = () => {
   const deleteBudget=async(id,budgetId)=>{
     try{
            setLoading(true)
-           await hooks.deletePost(`/houseTracker/deleteBudget/${id}/${budgetId}`);
+           await hooks.deletePost(`/houseTrackerV1/deleteBudget/${id}/${budgetId}`);
            setReqId(id)
            setLoading(false)
     }catch(err){
@@ -51,17 +51,25 @@ const AllData = () => {
 
 
 const sum =(groupId)=>{
-    const requestTime= datafromDB?.filter(item=>(
-        (item?._id===groupId)
+    const request= datafromDB && datafromDB?.filter(item=>(
+        (item?._id===hooks.getItemLocalStorage(groupId))
     ));
-    const expenseList = requestTime.map(timeframe=>(
-        timeframe.expenseList
-    )).flat();
-    
-    const filterApproved = expenseList.filter(expense=> expense?.status.includes("approved"))
-    console.log("filterApprove", filterApproved)
-    const amountRequired = expenseList.reduce((acc, value)=>(acc + value.amountRequired),0)
-    const amountApproved = filterApproved.reduce((acc, value)=>(acc + value.amountRequired),0)
+    // const budget = request.map(timeframe=>(
+    //     timeframe.budget
+    // ));
+
+    // const amount = budget.map(item=>(
+    //     item
+    // )).flat();
+    // const expenseList = amount.map(item=>(
+    //     item.expenseList
+    // )).flat();
+    const expenseList = request?.map(item=>(
+        item.expenseList
+    ));
+    const filterApproved = expenseList?.filter(expenseList=> expenseList?.status.includes("approved"))
+    const amountRequired = expenseList?.reduce((acc, value)=>(acc + value.amountRequired),0)
+    const amountApproved = filterApproved?.reduce((acc, value)=>(acc + value.amountRequired),0)
     const amountPending = amountRequired-amountApproved
 
 
@@ -95,7 +103,7 @@ const handleApprove=async(postId, expenseId, expenseList, status)=>{
             status        : status,
             // user          : user
         }
-       const res = await hooks.upDatePost(`/houseTracker/verifyStatus/${postId}`, initialState)
+       const res = await hooks.upDatePost(`/houseTrackerV1/verifyStatus/${postId}`, initialState)
        console.log("res", res?.data)
        const findIndex =  datafromDB.findIndex(data=> data._id.toString(res?.data._id))
        const arr = [...datafromDB]
@@ -131,38 +139,8 @@ const check=(budgetDetail)=>{
 
 const setUpNewUser=()=>{
     reactHooks.navigate(`/allUsers`)
-};
-
-const updateOutdatedTracker=async()=>{
-    const requestTime= datafromDB?.filter(item=>(
-        (item?._id==="673d980b6501517ffb7b4257")
-    ));
-    const budget = requestTime.map(timeframe=>(
-        timeframe.budget
-    ));
-
-    const amount = budget.map(item=>(
-        item
-    )).flat();
-    const expenseList = amount.map(item=>(
-        item.expenseList
-    )).flat();
-
-   
-    try{
-         await expenseList.map((item)=>{
-          return  (hooks.upDatePost(`/houseTracker/updateOutdated`, item))
-    })        
-    }catch(err){
-        throw(err)
-    }
 }
 
-// const SmartTracker="674af4b8f53e4144628df1a4"
-// const old="673d980b6501517ffb7b4257"
-
-// const filter = datafromDB.filter(item=>item?._id.includes(SmartTracker))
-// console.log("filter", filter)
 
   return (
     <div className='allData'>
@@ -178,24 +156,23 @@ const updateOutdatedTracker=async()=>{
                 {/* <div>{item?._id}</div> */}
                 <div><strong className="month-year"
                 >{item.month}  {item.year}</strong></div>
-                <div style={{textAlign:"center"}}>{item._id}</div>
                 <div><strong className="item">{sum(item?._id)}</strong></div>
                 <section className='budgetWrapper'>
-                {item?.expenseList.map(expense=>(
+                {item?.expenseList.map(expenseList=>(
                     <div 
-                    key={expense?._id} 
+                    key={expenseList?._id} 
                     className="budget" 
-                    onClick={()=> view(item, expense.expenseList, expense?._id)}
-                    style={{backgroundColor: budgetColor(expense.status)}}
+                    onClick={()=> view(item, expenseList, expenseList?._id)}
+                    style={{backgroundColor: budgetColor(expenseList.status)}}
                     >
                     {/* <section style={{display:"flex", justifyContent:"space-between"}}> */}
 
-                        <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{expense.purpose.slice(0,8)}{check(expense.purpose)}</div>
-                        <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{expense.detail.slice(0,8)}{check(expense.detail)}</div>
+                        <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{expenseList.purpose.slice(0,8)}{check(expenseList.purpose)}</div>
+                        <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{expenseList.detail.slice(0,8)}{check(expenseList.detail)}</div>
 
-                        <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(expense.amountRequired)}</div>
-                        {/* <div className="budgetItem" style={{fontSize:"12px"}}>{expense.firstName} {expense.date.slice(0,6)} </div> */}
-                        <div className="budgetItem" style={{fontSize:"12px"}}>{expense.username}</div>
+                        <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(expenseList.amountRequired)}</div>
+                        <div className="budgetItem" style={{fontSize:"12px"}}>{expenseList.firstName} {expenseList.date.slice(0,6)} </div>
+                        <div className="budgetItem" style={{fontSize:"12px"}}>{expenseList.username}</div>
                     {/* </section> */}
                     </div>
                 )).reverse()}
@@ -258,7 +235,6 @@ const updateOutdatedTracker=async()=>{
                 padding:"8px", borderRadius:"2px"
                  }}>Add Group Member </button>
         </div>
-        <button disabled={true} style={{position:"fixed", bottom:"60px"}} onClick={()=> updateOutdatedTracker()}>UPDATE OUTDATED</button>
     </div>
   )
 }

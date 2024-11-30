@@ -43,7 +43,7 @@ function Groups(){
           user,
          }
         try{
-           await hooks.createPost(`/houseTracker/v1/${"1234"}`, dataToCreate)
+           await hooks.createPost(`/houseTracker/createGroup/${"1234"}`, dataToCreate)
           setCreateNewGroup(prev=>!prev)
           setNotification(prev=> !prev)
   
@@ -65,7 +65,7 @@ function Groups(){
         hooks.setItemLocalStorage('dayCreated', groupItem?.dayCreated)
         hooks.setItemLocalStorage('monthCreated', groupItem?.monthCreated)
         hooks.setItemLocalStorage('yearCreated', groupItem?.yearCreated)
-        reactHooks.navigate(`/?group-name=${groupItem.groupName}&groupId=${groupId}`)
+        reactHooks.navigate(`/allData2?group-name=${groupItem.groupName}&groupId=${groupId}`)
       }
   
   
@@ -78,6 +78,7 @@ function Groups(){
                         <div className="grp-item-logo">{dBGroups[group?.groupId]?._doc.groupName.slice(0,1)}</div>
                         <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupName}</div>
                         <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupMember.length}</div>
+                        <div className="grp-item">{dBGroups[group?.groupId]?._doc._id}</div>
                         {/* <div className="grp-item">{dBGroups[group?.groupId]?._doc._id}</div> */}
                     </div>    
             </div>

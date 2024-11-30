@@ -11,8 +11,8 @@ import "./request.css"
 function Request (){
     // const dispatch = useDispatch()
     // const navigate = useNavigate()
-    const { user, setUser, groupId } = useGlobalState()
-
+    const { user, setUser,  } = useGlobalState()
+    // groupId
     
     
 
@@ -55,7 +55,7 @@ function Request (){
             alert("Input amount to continue")
             return
           }else{
-            const res = await hooks.createPost("/houseTracker/createRequest", {...request, groupId})
+            const res = await hooks.createPost("/houseTracker/createRequest", {...request, groupId: hooks.getItemLocalStorage(`groupId`)})
             setRequest(initialState)
             setDatafromDB([...datafromDB, res?.data])
             setUser(hooks.getItemLocalStorage("user"))
@@ -69,7 +69,7 @@ function Request (){
 
   return (
     <div className="request-cont">
-        { true ?
+        { false ?
         < AddExpense 
           request={request}
           setRequest={setRequest}
