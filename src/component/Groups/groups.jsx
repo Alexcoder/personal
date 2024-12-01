@@ -78,8 +78,7 @@ function Groups(){
                         <div className="grp-item-logo">{dBGroups[group?.groupId]?._doc.groupName.slice(0,1)}</div>
                         <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupName}</div>
                         <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupMember.length}</div>
-                        <div className="grp-item">{dBGroups[group?.groupId]?._doc._id}</div>
-                        {/* <div className="grp-item">{dBGroups[group?.groupId]?._doc._id}</div> */}
+                        <div className="grp-item">{dBGroups[group?.groupId]?._doc.expenseList.length}requests</div>
                     </div>    
             </div>
            ))}
