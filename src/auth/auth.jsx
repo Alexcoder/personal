@@ -45,7 +45,7 @@ const Auth = () => {
           setRequest(initialState)
           setLoading(prev=> !prev)
           setReqId(res?.data._id)
-          navigate("/")
+          navigate("/groups")
         }catch(err){
             setNotification(true)
             setErrorMessage(err?.response.data)  
