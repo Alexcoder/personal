@@ -4,7 +4,6 @@ import HouseTracker from './component/houseTracker/houseTracker';
 import { Route, Routes, } from 'react-router-dom';
 import Auth from './auth/auth';
 import AllData from "./component/allData/allData";
-import AllData2 from "./component/allData2/allData2";
 import Navbar from './component/navbar/navbar';
 import Footer from './component/footer/footer';
 import { useGlobalState } from './state/context/context';
@@ -33,8 +32,6 @@ function App() {
      <Routes>
        <Route path={"/"} element={ !user ? <Auth/> : ReRouteAuth(AllData) }/>
        <Route path="/budget"  element={ ReRouteAuth(HouseTracker)}/>
-       <Route path="/allData2"  element={ ReRouteAuth(AllData2)}/>
-       {/* <Route path={user?"/"}  element={ ReRouteAuth(AllData)}/> */}
        <Route path="/groups"  element={ ReRouteAuth(Groups)}/>
        <Route path="/allUsers"  element={ ReRouteAuth(AllUsers)}/>
      </Routes>

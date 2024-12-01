@@ -6,14 +6,15 @@ import "./allData.css"
 import useReactHooks from '../../hooks/reactHooks';
 
 const AllData = () => {
+    const {user, reqId, setReqId, loading, setLoading, addRequest} = useGlobalState();
     const [datafromDB, setDatafromDB] = useState([])
-    const [budgetItem, setBudgetItem] = useState("");
+    const [budgetItem, setBudgetItem] = useState(hooks.getItemLocalStorage(`groupItem`));
     const [budgetId, setBudgetId] = useState("");
     const [postItem, setPostItem] = useState("");
     const [fullPost, setFullPost] = useState(false);
-    const {user, reqId, setReqId, loading, setLoading, addRequest} = useGlobalState();
     const reactHooks = useReactHooks()
     console.log("datafromDB", datafromDB)
+    console.log('budgetItem', budgetItem)
 
     useEffect(()=>{
       const fetchData=async()=>{
@@ -59,7 +60,6 @@ const sum =(groupId)=>{
     )).flat();
     
     const filterApproved = expenseList.filter(expense=> expense?.status.includes("approved"))
-    console.log("filterApprove", filterApproved)
     const amountRequired = expenseList.reduce((acc, value)=>(acc + value.amountRequired),0)
     const amountApproved = filterApproved.reduce((acc, value)=>(acc + value.amountRequired),0)
     const amountPending = amountRequired-amountApproved
@@ -114,7 +114,7 @@ function budgetColor(status){
           : "green"
 };
 
-const view=(postItem, budgetItem, budgetId)=>{
+function view(postItem, budgetItem, budgetId){
     setFullPost(prev=> !prev)
     setBudgetItem(budgetItem)
     setPostItem(postItem)
@@ -159,49 +159,50 @@ const updateOutdatedTracker=async()=>{
 }
 
 // const SmartTracker="674af4b8f53e4144628df1a4"
-// const old="673d980b6501517ffb7b4257"
 
-// const filter = datafromDB.filter(item=>item?._id.includes(SmartTracker))
-// console.log("filter", filter)
+
+function displaySelectedGroup(){
+    const item = hooks.getItemLocalStorage(`groupItem`)
+    return(
+        <div key={item?._id} className="mapCont">
+          <button
+            className='delete-btn'
+            disabled={true}
+            onClick={()=> deleteItem(item?._id)}>
+            X
+        </button>
+        <div>{item?.groupName}</div>
+        <div><strong className="month-year"
+        >{item?.monthCreated}  {item?.yearCreated}</strong></div>
+        {/* <div style={{textAlign:"center"}}>{item._id}</div> */}
+        <div><strong className="item">{sum(item?._id)}</strong></div>
+        <section className='budgetWrapper'>
+        {item?.expenseList.map(expense=>(
+            <div 
+            key={expense?._id} 
+            className="budget" 
+            onClick={()=> view(item, expense, expense?._id)}
+            style={{backgroundColor: budgetColor(expense?.status)}}
+            >
+            {/* <section style={{display:"flex", justifyContent:"space-between"}}> */}
+
+                <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{expense?.purpose.slice(0,8)}{check(expense?.purpose)}</div>
+                <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{expense?.detail.slice(0,8)}{check(expense?.detail)}</div>
+
+                <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(expense?.amountRequired)}</div>
+                <div className="budgetItem" style={{fontSize:"12px"}}>{expense?.username}</div>
+            {/* </section> */}
+            </div>
+        )).reverse()}
+        </section>
+    </div>
+
+    )
+}
 
   return (
     <div className='allData'>
-        {loading ? "page loading...": datafromDB.length<1? "No Data Found": ""}
-        {datafromDB?.map((item)=>(
-            <div key={item?._id} className="mapCont">
-                <button
-                 className='delete-btn'
-                 disabled={true}
-                 onClick={()=> deleteItem(item?._id)}>
-                    X
-                </button>
-                {/* <div>{item?._id}</div> */}
-                <div><strong className="month-year"
-                >{item.month}  {item.year}</strong></div>
-                <div style={{textAlign:"center"}}>{item._id}</div>
-                <div><strong className="item">{sum(item?._id)}</strong></div>
-                <section className='budgetWrapper'>
-                {item?.expenseList.map(expense=>(
-                    <div 
-                    key={expense?._id} 
-                    className="budget" 
-                    onClick={()=> view(item, expense.expenseList, expense?._id)}
-                    style={{backgroundColor: budgetColor(expense.status)}}
-                    >
-                    {/* <section style={{display:"flex", justifyContent:"space-between"}}> */}
-
-                        <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{expense.purpose.slice(0,8)}{check(expense.purpose)}</div>
-                        <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{expense.detail.slice(0,8)}{check(expense.detail)}</div>
-
-                        <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(expense.amountRequired)}</div>
-                        {/* <div className="budgetItem" style={{fontSize:"12px"}}>{expense.firstName} {expense.date.slice(0,6)} </div> */}
-                        <div className="budgetItem" style={{fontSize:"12px"}}>{expense.username}</div>
-                    {/* </section> */}
-                    </div>
-                )).reverse()}
-                </section>
-            </div>
-        ))}
+        {loading ? "page loading...": datafromDB.length<1? "No Data Found": displaySelectedGroup() }
         { fullPost &&
         <section 
          style={{
