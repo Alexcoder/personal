@@ -14,7 +14,7 @@ function AllUsers(){
     async function addUserToGroup(selectedUserId, user){
         setSelectedId(selectedUserId)
        try{
-          const res = await hooks.createPost(`/auth/addUserToGroup/${selectedId}`, {
+          const res = await hooks.upDatePost(`/auth/addUserToGroup/${selectedId}`, {
             groupId      :  hooks.getItemLocalStorage(`groupId`),
             monthCreated :  hooks.getItemLocalStorage(`monthCreated`), 
             yearCreated  :  hooks.getItemLocalStorage(`yearCreated`), 
