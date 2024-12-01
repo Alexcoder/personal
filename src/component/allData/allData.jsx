@@ -8,19 +8,23 @@ import useReactHooks from '../../hooks/reactHooks';
 const AllData = () => {
     const {user, reqId, setReqId, loading, setLoading, addRequest} = useGlobalState();
     const [datafromDB, setDatafromDB] = useState([])
-    const [budgetItem, setBudgetItem] = useState(hooks.getItemLocalStorage(`groupItem`));
+    const [budgetItem, setBudgetItem] = useState(``);
+    // const [budgetItemCreator, setBudgetItemCreator] = useState(hooks.getItemLocalStorage(`budgetItemCreator`));
     const [budgetId, setBudgetId] = useState("");
     const [postItem, setPostItem] = useState("");
     const [fullPost, setFullPost] = useState(false);
+    // const [fetching, setFetching] = useState(false);
     const reactHooks = useReactHooks()
     console.log("datafromDB", datafromDB)
     console.log('budgetItem', budgetItem)
+    // console.log('budgetItemCreator', budgetItemCreator)
 
     useEffect(()=>{
       const fetchData=async()=>{
           try{
               setLoading(true)
-              const res = await hooks.getPost("/houseTracker/")
+            //   const res = await hooks.getPost("/houseTracker/")
+            const res = await hooks.houseTracker().getAllPost()
               setDatafromDB(res?.data)
               setLoading(false)
           }catch(err){ throw(err)}
@@ -38,7 +42,8 @@ const AllData = () => {
     }catch(err){
         throw(err)
     }
-  }
+  };
+
   const deleteBudget=async(id,budgetId)=>{
     try{
            setLoading(true)
@@ -50,7 +55,6 @@ const AllData = () => {
     }
   }
 
-
 const sum =(groupId)=>{
     const requestTime= datafromDB?.filter(item=>(
         (item?._id===groupId)
@@ -58,13 +62,10 @@ const sum =(groupId)=>{
     const expenseList = requestTime.map(timeframe=>(
         timeframe.expenseList
     )).flat();
-    
     const filterApproved = expenseList.filter(expense=> expense?.status.includes("approved"))
     const amountRequired = expenseList.reduce((acc, value)=>(acc + value.amountRequired),0)
     const amountApproved = filterApproved.reduce((acc, value)=>(acc + value.amountRequired),0)
     const amountPending = amountRequired-amountApproved
-
-
 return  (
     <div style={{display:"flex", justifyContent:"space-between", padding:"10px 5px"}}>
     <div style={{color:"green"}}>NGN {hooks.formatNumber(amountApproved)}</div>    
@@ -77,25 +78,18 @@ return  (
 const handleApprove=async(postId, expenseId, expenseList, status)=>{
    try{
         const initialState={
-            creator       : user?._id,
-            username      : user?.username,
-            email         : user?.email,
-            firstName     : user?.firstName,
-            lastName      : user?.lastName,
-            requestor     : expenseList.creator,
+            user,
             itemId        : expenseList._id, 
 
-            
             detail        : expenseList.detail,
             purpose       : expenseList?.purpose,
             amount        : expenseList.amount,
-            date          : hooks.formatDate.fullDate(),
-            
+            date          : hooks.formatDate.fullDate(),   
             expenseId     : expenseId,
             status        : status,
-            // user          : user
+            groupId       : hooks.getItemLocalStorage("groupId")
         }
-       const res = await hooks.upDatePost(`/houseTracker/verifyStatus/${postId}`, initialState)
+       const res = await hooks.verifyStatus(`/houseTracker/verifyStatus/${postId}`, initialState)
        console.log("res", res?.data)
        const findIndex =  datafromDB.findIndex(data=> data._id.toString(res?.data._id))
        const arr = [...datafromDB]
@@ -132,34 +126,6 @@ const check=(budgetDetail)=>{
 const setUpNewUser=()=>{
     reactHooks.navigate(`/allUsers`)
 };
-
-const updateOutdatedTracker=async()=>{
-    const requestTime= datafromDB?.filter(item=>(
-        (item?._id==="673d980b6501517ffb7b4257")
-    ));
-    const budget = requestTime.map(timeframe=>(
-        timeframe.budget
-    ));
-
-    const amount = budget.map(item=>(
-        item
-    )).flat();
-    const expenseList = amount.map(item=>(
-        item.expenseList
-    )).flat();
-
-   
-    try{
-         await expenseList.map((item)=>{
-          return  (hooks.upDatePost(`/houseTracker/updateOutdated`, item))
-    })        
-    }catch(err){
-        throw(err)
-    }
-}
-
-// const SmartTracker="674af4b8f53e4144628df1a4"
-
 
 function displaySelectedGroup(){
     const item = hooks.getItemLocalStorage(`groupItem`)
@@ -198,7 +164,9 @@ function displaySelectedGroup(){
     </div>
 
     )
-}
+};
+
+
 
   return (
     <div className='allData'>
@@ -232,9 +200,10 @@ function displaySelectedGroup(){
                  <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{ budgetItem.detail}</div>
                  
                  <div className="budgetItem" style={{fontSize:"16px", marginTop:"8px"}}>NGN {hooks.formatNumber(budgetItem.amountRequired)}</div>
-                 <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.firstName} {budgetItem.lastName} </div>
+                 {/* <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.firstName} {budgetItem.lastName} </div> */}
+                 {/* {fetching? ". . ." : <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItemCreator?.firstName} {budgetItemCreator?.lastName} </div>} */}
                  <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.date} </div>
-                 <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.username}</div>
+                 {/* <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItemCreator.username}</div> */}
 
                  <div style={{display:"flex",gap:"40px", justifyContent:"space-between", paddingTop:"15px"}}>
                         { user?.email==="mogaleza@gmail.com" && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem._id, budgetItem, "approved")}} className="approve-btn elevate"
@@ -259,7 +228,6 @@ function displaySelectedGroup(){
                 padding:"8px", borderRadius:"2px"
                  }}>Add Group Member </button>
         </div>
-        <button disabled={true} style={{position:"fixed", bottom:"60px"}} onClick={()=> updateOutdatedTracker()}>UPDATE OUTDATED</button>
     </div>
   )
 }

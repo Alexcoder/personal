@@ -2,14 +2,23 @@ import axios from "axios";
 
 
 export const api = axios.create({
-    // baseURL: "http://localhost:8000/api",
-    baseURL: "https://personal-api-amc2.onrender.com/api"
+    baseURL: "http://localhost:8000/api",
+    // baseURL: "https://personal-api-amc2.onrender.com/api"
 });
 
 export const getPost=(routeWithParam)=> api.get(routeWithParam);
 export const createPost=(route, data)=> api.post(route, data)
 export const upDatePost=(route, data)=> api.put(route, data)
 export const deletePost=(routeWithParams)=> api.delete(routeWithParams)
+export const verifyStatus=(route, data)=> api.patch(route, data)
+
+export const houseTracker=()=>{
+   const getAllPost =()=> api.get(`/houseTracker/`) 
+  return{
+      getAllPost,
+
+  }
+}
 
 export const monthFormat ={
     Jan : "January",

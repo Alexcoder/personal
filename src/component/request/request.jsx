@@ -69,7 +69,7 @@ function Request (){
 
   return (
     <div className="request-cont">
-        { false ?
+        { true ?
         < AddExpense 
           request={request}
           setRequest={setRequest}
