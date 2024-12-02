@@ -2,17 +2,21 @@ import React, {useState, useEffect} from 'react';
 import * as hooks from "../../hooks/hooks";
 import {useGlobalState} from "../../state/context/context"
 import Request from '../request/request';
+import Groups from "./children/group"
 import "./allData.css"
 import useReactHooks from '../../hooks/reactHooks';
+import FullPost from './children/fullPost';
+import Notification from '../../reusableComponent/notification/notification';
 
 const AllData = () => {
-    const {user, reqId, setReqId, loading, setLoading, addRequest} = useGlobalState();
+    const {user, reqId, setReqId, loading, setLoading, addRequest, message, notification} = useGlobalState();
     const [datafromDB, setDatafromDB] = useState([])
     const [budgetItem, setBudgetItem] = useState(``);
     // const [budgetItemCreator, setBudgetItemCreator] = useState(hooks.getItemLocalStorage(`budgetItemCreator`));
     const [budgetId, setBudgetId] = useState("");
     const [postItem, setPostItem] = useState("");
     const [fullPost, setFullPost] = useState(false);
+
     // const [fetching, setFetching] = useState(false);
     const reactHooks = useReactHooks()
     console.log("datafromDB", datafromDB)
@@ -127,93 +131,37 @@ const setUpNewUser=()=>{
     reactHooks.navigate(`/allUsers`)
 };
 
-function displaySelectedGroup(){
-    const item = hooks.getItemLocalStorage(`groupItem`)
-    return(
-        <div key={item?._id} className="mapCont">
-          <button
-            className='delete-btn'
-            disabled={true}
-            onClick={()=> deleteItem(item?._id)}>
-            X
-        </button>
-        <div>{item?.groupName}</div>
-        <div><strong className="month-year"
-        >{item?.monthCreated}  {item?.yearCreated}</strong></div>
-        {/* <div style={{textAlign:"center"}}>{item._id}</div> */}
-        <div><strong className="item">{sum(item?._id)}</strong></div>
-        <section className='budgetWrapper'>
-        {item?.expenseList.map(expense=>(
-            <div 
-            key={expense?._id} 
-            className="budget" 
-            onClick={()=> view(item, expense, expense?._id)}
-            style={{backgroundColor: budgetColor(expense?.status)}}
-            >
-            {/* <section style={{display:"flex", justifyContent:"space-between"}}> */}
+const item = hooks.getItemLocalStorage(`groupItem`)
 
-                <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{expense?.purpose.slice(0,8)}{check(expense?.purpose)}</div>
-                <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{expense?.detail.slice(0,8)}{check(expense?.detail)}</div>
-
-                <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(expense?.amountRequired)}</div>
-                <div className="budgetItem" style={{fontSize:"12px"}}>{expense?.username}</div>
-            {/* </section> */}
-            </div>
-        )).reverse()}
-        </section>
-    </div>
-
-    )
-};
 
 
 
   return (
     <div className='allData'>
-        {loading ? "page loading...": datafromDB.length<1? "No Data Found": displaySelectedGroup() }
+        {loading ? "page loading...": 
+           datafromDB.length<1? "No Data Found": 
+           <Groups 
+             item={item} 
+             deleteItem={deleteItem} 
+             hooks={hooks} 
+             check={check}
+             view={view}
+             sum={sum}
+             budgetColor={budgetColor}
+             /> }
+        
         { fullPost &&
-        <section 
-         style={{
-          background: "rgba(45, 45, 45, 0.6)",
-          width: "100vw",
-          height:"100vh",
-          display:"flex", justifyContent:"center", alignItems:"center",
-          position: "fixed",
-          top: "0", left:"0", right:"", bottom:"0",
-        }}>
-            <div
-            style={{
-                // background:"white",
-                backgroundColor: budgetColor(budgetItem.status),
-
-                color:"white",
-                // width : "fit",
-                padding: "10px",
-                borderRadius: "2px",
-                // textAlign: "center",
-                gap:"4px"
-            }}>
-                <div style={{float:"right", marginLeft:"10px"}}>
-                <button onClick={()=> setFullPost(prev=> !prev)}>X</button>
-                </div>
-                 <div className="budgetItem" style={{fontSize:"16px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budgetItem.purpose}</div>
-                 <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{ budgetItem.detail}</div>
-                 
-                 <div className="budgetItem" style={{fontSize:"16px", marginTop:"8px"}}>NGN {hooks.formatNumber(budgetItem.amountRequired)}</div>
-                 {/* <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.firstName} {budgetItem.lastName} </div> */}
-                 {/* {fetching? ". . ." : <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItemCreator?.firstName} {budgetItemCreator?.lastName} </div>} */}
-                 <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.date} </div>
-                 {/* <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItemCreator.username}</div> */}
-
-                 <div style={{display:"flex",gap:"40px", justifyContent:"space-between", paddingTop:"15px"}}>
-                        { user?.email==="mogaleza@gmail.com" && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem._id, budgetItem, "approved")}} className="approve-btn elevate"
-                        style={{display: budgetItem.status==="pending"? "block" : "none"}} >{budgetItem.status? "confirm" : ""}</div>}
-                        { user?.email==="mogaleza@gmail.com" && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem?._id, budgetItem, "denied")}} className="reject-btn elevate" style={{  display: budgetItem.status==="pending"? "block" : "none"}}>{budgetItem.status? "reject" : ""}</div>}
-                        { <button style={{display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none"}} onClick={()=>{setFullPost(prev=> !prev); deleteBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">delete</button> }
-
-                </div>            
-            </div>
-        </section>
+          <FullPost
+          budgetColor={budgetColor} 
+          budgetId={budgetId} 
+          budgetItem={budgetItem} 
+          setFullPost={setFullPost} 
+          hooks={hooks} 
+          handleApprove={handleApprove} 
+          user={user} 
+          deleteBudget={deleteBudget}
+          postItem={postItem}
+          />
         }
 
         { addRequest && <Request/>}
@@ -221,13 +169,14 @@ function displaySelectedGroup(){
             <button 
             onClick={()=> setUpNewUser()}
             style={{
-                position:"fixed", top:"75px", left:"10px",
+                position:"fixed", top:"40px", left:"1px",
                 border:"none",
                 background:"darkred", color:"white",
                 fontSize:"14px",
                 padding:"8px", borderRadius:"2px"
                  }}>Add Group Member </button>
         </div>
+        { notification && <Notification message={message} onClick={()=>reactHooks.navigate(`/`) }/>}
     </div>
   )
 }

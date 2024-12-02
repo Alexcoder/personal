@@ -14,8 +14,10 @@ export const verifyStatus=(route, data)=> api.patch(route, data)
 
 export const houseTracker=()=>{
    const getAllPost =()=> api.get(`/houseTracker/`) 
+   const updateExpenseList =(param, data)=> api.put(`/houseTracker/updateExpenseList/${param}`, data) 
   return{
       getAllPost,
+      updateExpenseList,
 
   }
 }

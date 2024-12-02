@@ -3,15 +3,15 @@ import AddExpense from './sub/addExpense'
 import ShowTracker from './sub/showTracker';
 // import { useDispatch } from 'react-redux'
 import * as hooks from "../../hooks/hooks"
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from '../../state/context/context';
 import "./request.css"
 
 
 function Request (){
     // const dispatch = useDispatch()
-    // const navigate = useNavigate()
-    const { user, setUser,  } = useGlobalState()
+    const navigate = useNavigate()
+    const { user, setUser, setNotification, setMessage  } = useGlobalState()
     // groupId
     
     
@@ -56,10 +56,12 @@ function Request (){
             return
           }else{
             const res = await hooks.createPost("/houseTracker/createRequest", {...request, groupId: hooks.getItemLocalStorage(`groupId`)})
+            setNotification(true)
             setRequest(initialState)
             setDatafromDB([...datafromDB, res?.data])
             setUser(hooks.getItemLocalStorage("user"))
-            // navigate("/allData")
+            navigate("/groups")
+            setMessage("Request added successfully")
           }
 
         }catch(err){
@@ -82,7 +84,6 @@ function Request (){
         <ShowTracker 
         datafromDB={datafromDB} />        
     }
-
     </div>
   )
 }

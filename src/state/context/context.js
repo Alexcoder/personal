@@ -17,6 +17,7 @@ export const MyContext = ({children}) => {
     const[addRequest, setAddRequest] = useState(false)
     const[allUsers, setAllUsers] = useState([])
     const[selectedId, setSelectedId] = useState(``)
+    const[message, setMessage] = useState(``)
 
     
     useEffect(()=>{
@@ -59,7 +60,9 @@ export const MyContext = ({children}) => {
         allUsers, 
         setAllUsers,
         selectedId, 
-        setSelectedId
+        setSelectedId,
+        message, 
+        setMessage,
     }}>
         {children}     
     </StateContext.Provider>
