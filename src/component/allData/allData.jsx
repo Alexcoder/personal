@@ -175,7 +175,7 @@ const item = hooks.getItemLocalStorage(`groupItem`)
                 background:"inherit", color:"darkred",
                 fontSize:"14px",
                 padding:"8px 12px", borderRadius:"2px", fontWeight:"600",
-                 }}>Add Group Member </button>
+                 }}>New Member </button>
         </div>
         { notification && <Notification message={message} onClick={()=>reactHooks.navigate(`/`) }/>}
     </div>
