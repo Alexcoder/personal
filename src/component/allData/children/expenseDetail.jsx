@@ -1,7 +1,7 @@
 import React from 'react'
 import "../allData.css"
 
-const FullPost = ({budgetColor, budgetId, budgetItem, setFullPost, hooks, handleApprove, user, deleteBudget, postItem}) => {
+const ExpenseDetail = ({budgetColor, budgetId, budgetItem, setFullPost, hooks, handleApprove, user, deleteBudget, postItem}) => {
 
   return (
     <div>
@@ -45,4 +45,4 @@ const FullPost = ({budgetColor, budgetId, budgetItem, setFullPost, hooks, handle
   )
 }
 
-export default FullPost
+export default ExpenseDetail

@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import * as hooks from "../../hooks/hooks";
 import {useGlobalState} from "../../state/context/context"
 import Request from '../request/request';
-import Groups from "./children/group"
+import ExpenseList from "./children/expenseList"
+import ExpenseDetail from './children/expenseDetail';
 import "./allData.css"
 import useReactHooks from '../../hooks/reactHooks';
-import FullPost from './children/fullPost';
 import Notification from '../../reusableComponent/notification/notification';
 
 const AllData = () => {
@@ -140,7 +140,7 @@ const item = hooks.getItemLocalStorage(`groupItem`)
     <div className='allData'>
         {loading ? "page loading...": 
            datafromDB.length<1? "No Data Found": 
-           <Groups 
+           <ExpenseList 
              item={item} 
              deleteItem={deleteItem} 
              hooks={hooks} 
@@ -151,7 +151,7 @@ const item = hooks.getItemLocalStorage(`groupItem`)
              /> }
         
         { fullPost &&
-          <FullPost
+          <ExpenseDetail
           budgetColor={budgetColor} 
           budgetId={budgetId} 
           budgetItem={budgetItem} 
@@ -165,6 +165,7 @@ const item = hooks.getItemLocalStorage(`groupItem`)
         }
 
         { addRequest && <Request/>}
+
         <div style={{ position:"fixed", top:"60px", left:"0px", right:"0px",background:"inherit",
 }}>        
  {/* <div>{item?.groupName}</div> */}
@@ -176,6 +177,7 @@ const item = hooks.getItemLocalStorage(`groupItem`)
                 fontSize:"14px",
                 padding:"8px 12px", borderRadius:"2px", fontWeight:"600",
                  }}>New Member </button>
+                 {/* <div>{item?.groupName}</div> */}
         </div>
         { notification && <Notification message={message} onClick={()=>reactHooks.navigate(`/`) }/>}
     </div>

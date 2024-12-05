@@ -1,7 +1,7 @@
 import React from 'react'
 import "../allData.css"
 
-const Group = ({item, deleteItem, hooks, check, view, budgetColor, sum}) => {
+const ExpenseList = ({item, deleteItem, hooks, check, view, budgetColor, sum}) => {
 
   return (
     <div>
@@ -12,8 +12,11 @@ const Group = ({item, deleteItem, hooks, check, view, budgetColor, sum}) => {
             onClick={()=> deleteItem(item?._id)}>
             X
         </button>
-        <div><strong className="month-year"
-        >{item?.groupName}</strong></div>
+        {/* <section style={{display:"flex"}}>
+          <div><strong className="month-year"
+          >{item?.groupName}</strong></div>
+          <div>New Member</div> 
+        </section> */}
         <div><strong className="item">{sum(item?._id)}</strong></div>
         <section className='budgetWrapper'>
         {item?.expenseList.map(expense=>(
@@ -40,4 +43,4 @@ const Group = ({item, deleteItem, hooks, check, view, budgetColor, sum}) => {
   )
 }
 
-export default Group
+export default ExpenseList
