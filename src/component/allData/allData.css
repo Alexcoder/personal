@@ -1,10 +1,11 @@
 .allData{
-    width: 98vw;
+    width: 99vw;
 }
 .mapCont{
     background-color: aliceblue;
-    padding: 4px;
+    padding: 2px 2px;
     border-radius: 2px;
+    min-height: 86vh;
    
 }
 .budgetWrapper{
@@ -28,7 +29,7 @@
 }
 .month-year{
     text-transform: uppercase;display:flex; justify-content:center; background:lightgray; 
-    padding: 5px   
+    padding: 20px 0;  
 }
 .approve-btn{
     background:white;color: black; width: fit-content; font-size: 10px; padding: 1px 3px; cursor: pointer;   

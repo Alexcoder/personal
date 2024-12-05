@@ -8,18 +8,18 @@ import { useGlobalState } from '../../state/context/context';
 const Navbar = () => {
     const navigate = useNavigate();
     const {user, setUser} = useGlobalState();
-    const desig = Number((hooks.formatDate.time).slice(0,3)) < Number(12) ? "AM" 
-    : "PM"
+    // const desig = Number((hooks.formatDate.time).slice(0,3)) < Number(12) ? "AM" 
+    // : "PM"
 
 
 
   return (
     <main className='nav-cont'>
-      <div className="nav-time-wrap">
-         <strong>{hooks.formatDate.weekDay}</strong>
-         <div>{hooks.formatDate.time.slice(0,6)} {desig}</div>
+      {/* <div className="nav-time-wrap"> */}
+         {/* <strong>{hooks.formatDate.weekDay}</strong> */}
+         {/* <div>{hooks.formatDate.time.slice(0,6)} {desig}</div> */}
          {/* <div>{hooks.formatDate.date} {hooks.formatDate.month}</div> */}
-      </div>
+      {/* </div> */}
      <div className='nav-btn-cont' style={{}}>
         
         {user && <div className='btnnn' style={{ fontWeight:"500", cursor: "pointer"}} onClick={()=> navigate("/")}>Home</div>}

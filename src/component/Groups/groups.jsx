@@ -65,7 +65,7 @@ function Groups(){
         hooks.setItemLocalStorage('dayCreated', groupItem?.dayCreated)
         hooks.setItemLocalStorage('monthCreated', groupItem?.monthCreated)
         hooks.setItemLocalStorage('yearCreated', groupItem?.yearCreated)
-        reactHooks.navigate(`/?group-name=${groupItem.groupName}&groupId=${groupId}`)
+        reactHooks.navigate(`/allData?group-name=${groupItem.groupName}&groupId=${groupId}`)
       }
   
   

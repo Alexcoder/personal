@@ -27,7 +27,7 @@ const Group = ({item, deleteItem, hooks, check, view, budgetColor, sum}) => {
                 <div className="budgetItem" style={{fontSize:"14px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{expense?.purpose.slice(0,8)}{check(expense?.purpose)}</div>
                 <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{expense?.detail.slice(0,8)}{check(expense?.detail)}</div>
                 <div className="budgetItem" style={{fontSize:"15px"}}>NGN {hooks.formatNumber(expense?.amountRequired)}</div>
-                <div className="budgetItem" style={{fontSize:"12px"}}>{expense?.username}</div>
+                <div className="budgetItem" style={{fontSize:"10px"}}>{expense?.date && expense?.date.slice(0,5)}  {expense?.firstName}</div>
             {/* </section> */}
             </div>
         )).reverse()}

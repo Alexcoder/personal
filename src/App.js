@@ -30,9 +30,9 @@ function App() {
         {successMessage.length? "" : ""}
         <Navbar/> 
      <Routes>
-       <Route path={"/"} element={ !user ? <Auth/> : ReRouteAuth(AllData) }/>
+       <Route path={"/"} element={ !user ? <Auth/> : ReRouteAuth(Groups) }/>
        <Route path="/budget"  element={ ReRouteAuth(HouseTracker)}/>
-       <Route path="/groups"  element={ ReRouteAuth(Groups)}/>
+       <Route path="/allData"  element={ ReRouteAuth(AllData)}/>
        <Route path="/allUsers"  element={ ReRouteAuth(AllUsers)}/>
      </Routes>
      

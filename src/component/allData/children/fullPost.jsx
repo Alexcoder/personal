@@ -29,10 +29,8 @@ const FullPost = ({budgetColor, budgetId, budgetItem, setFullPost, hooks, handle
                  <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{ budgetItem.detail}</div>
                  
                  <div className="budgetItem" style={{fontSize:"16px", marginTop:"8px"}}>NGN {hooks.formatNumber(budgetItem.amountRequired)}</div>
-                 {/* <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.firstName} {budgetItem.lastName} </div> */}
-                 {/* {fetching? ". . ." : <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItemCreator?.firstName} {budgetItemCreator?.lastName} </div>} */}
+                 <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.firstName} {budgetItem.lastName} </div>
                  <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.date} </div>
-                 {/* <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItemCreator.username}</div> */}
 
                  <div style={{display:"flex",gap:"40px", justifyContent:"space-between", paddingTop:"15px"}}>
                         { user?.email==="mogaleza@gmail.com" && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem._id, budgetItem, "approved")}} className="approve-btn elevate"

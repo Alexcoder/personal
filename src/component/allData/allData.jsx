@@ -165,15 +165,16 @@ const item = hooks.getItemLocalStorage(`groupItem`)
         }
 
         { addRequest && <Request/>}
-        <div style={{}}>
+        <div style={{ position:"fixed", top:"60px", left:"0px", right:"0px",background:"inherit",
+}}>        
+ {/* <div>{item?.groupName}</div> */}
             <button 
             onClick={()=> setUpNewUser()}
             style={{
-                position:"fixed", top:"40px", left:"1px",
                 border:"none",
-                background:"darkred", color:"white",
+                background:"inherit", color:"darkred",
                 fontSize:"14px",
-                padding:"8px", borderRadius:"2px"
+                padding:"8px 12px", borderRadius:"2px", fontWeight:"600",
                  }}>Add Group Member </button>
         </div>
         { notification && <Notification message={message} onClick={()=>reactHooks.navigate(`/`) }/>}
