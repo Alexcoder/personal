@@ -19,7 +19,7 @@ const Footer = () => {
         
         {/* {user && <button className='footer-btn' onClick={()=> createGroup()}>Create Group</button>} */}
         {user && <button className='footer-btn' onClick={()=> navigate("/")}>Groups</button>}
-        {(user && reactHooks.pathname==="/allData"  )? <button className='footer-btn' style={{position:"fixed", top:"50px", right:"20px", borderRadius:"50%", padding:"0px 10px", fontSize:"40px", background:"brown", border:"none", color:"white"}} onClick={()=> setAddRequest(prev=> !prev)}>
+        {(user && reactHooks.pathname==="/allData"  )? <button className='footer-btn' style={{position:"fixed", top:"55px", right:"20px", borderRadius:"50%", padding:"0px 10px", fontSize:"35px", background:"inherit", border:"none", color:"darkred"}} onClick={()=> setAddRequest(prev=> !prev)}>
           {addRequest  ? "x" : "+"}</button> : ""}
      </div>
 
