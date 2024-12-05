@@ -9,7 +9,7 @@ import useReactHooks from '../../hooks/reactHooks';
 import Notification from '../../reusableComponent/notification/notification';
 
 const AllData = () => {
-    const {user, reqId, setReqId, loading, setLoading, addRequest, message, notification} = useGlobalState();
+    const {user, reqId, setReqId, loading, setLoading, addRequest, message, notification, NAIRA} = useGlobalState();
     const [datafromDB, setDatafromDB] = useState([])
     const [budgetItem, setBudgetItem] = useState(``);
     // const [budgetItemCreator, setBudgetItemCreator] = useState(hooks.getItemLocalStorage(`budgetItemCreator`));
@@ -72,9 +72,9 @@ const sum =(groupId)=>{
     const amountPending = amountRequired-amountApproved
 return  (
     <div style={{display:"flex", justifyContent:"space-between", padding:"10px 5px"}}>
-    <div style={{color:"green"}}>NGN {hooks.formatNumber(amountApproved)}</div>    
-    <div style={{fontSize:"18px"}}>NGN {hooks.formatNumber(amountRequired)}</div>    
-    <div style={{color:"orange"}}>NGN {hooks.formatNumber(amountPending)}</div>    
+    <div style={{color:"green"}}>{NAIRA} {hooks.formatNumber(amountApproved)}</div>    
+    <div style={{fontSize:"18px"}}>{NAIRA} {hooks.formatNumber(amountRequired)}</div>    
+    <div style={{color:"orange"}}>{NAIRA} {hooks.formatNumber(amountPending)}</div>    
     </div>
 )
 };
@@ -148,6 +148,7 @@ const item = hooks.getItemLocalStorage(`groupItem`)
              view={view}
              sum={sum}
              budgetColor={budgetColor}
+             NAIRA={NAIRA}
              /> }
         
         { fullPost &&
@@ -161,6 +162,7 @@ const item = hooks.getItemLocalStorage(`groupItem`)
           user={user} 
           deleteBudget={deleteBudget}
           postItem={postItem}
+          NAIRA={NAIRA}
           />
         }
 

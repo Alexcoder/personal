@@ -1,8 +1,12 @@
 import React from 'react'
 import "../allData.css"
 
-const ExpenseDetail = ({budgetColor, budgetId, budgetItem, setFullPost, hooks, handleApprove, user, deleteBudget, postItem}) => {
-
+const ExpenseDetail = (props) => {
+  const {
+      budgetColor, budgetId, budgetItem, 
+      setFullPost, hooks, handleApprove, 
+      user, deleteBudget, postItem, NAIRA
+    } = props
   return (
     <div>
         <section 
@@ -28,7 +32,7 @@ const ExpenseDetail = ({budgetColor, budgetId, budgetItem, setFullPost, hooks, h
                  <div className="budgetItem" style={{fontSize:"16px", textTransform:"uppercase", color:"black", fontWeight:"650"}}>{budgetItem.purpose}</div>
                  <div className="budgetItem" style={{textAlign:"start",fontSize:"14px", fontStyle:"italic"}}>{ budgetItem.detail}</div>
                  
-                 <div className="budgetItem" style={{fontSize:"16px", marginTop:"8px"}}>NGN {hooks.formatNumber(budgetItem.amountRequired)}</div>
+                 <div className="budgetItem" style={{fontSize:"16px", marginTop:"8px"}}>{NAIRA} {hooks.formatNumber(budgetItem.amountRequired)}</div>
                  <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.firstName} {budgetItem.lastName} </div>
                  <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.date} </div>
 

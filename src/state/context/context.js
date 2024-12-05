@@ -19,6 +19,8 @@ export const MyContext = ({children}) => {
     const[selectedId, setSelectedId] = useState(``)
     const[message, setMessage] = useState(``)
 
+    const NAIRA = "\u20A6"
+
     
     useEffect(()=>{
         const fetchUserS=async()=>{
@@ -63,6 +65,7 @@ export const MyContext = ({children}) => {
         setSelectedId,
         message, 
         setMessage,
+        NAIRA,
     }}>
         {children}     
     </StateContext.Provider>
