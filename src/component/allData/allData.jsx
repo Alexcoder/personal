@@ -66,7 +66,7 @@ const AllData = () => {
     }
     try{
            setLoading(true)
-          const res = await hooks.houseTracker().editExpenseList( id, editInfo);
+           await hooks.houseTracker().editExpenseList( id, editInfo);
            setReqId(id)
         //  const groupItem = hooks.getItemLocalStorage(`groupItem`)
         //  const editIndex = groupItem?.expenseList.findIndex(expense=> expense?._id===res?.data._id)
