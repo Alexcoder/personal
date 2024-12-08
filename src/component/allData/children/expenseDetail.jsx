@@ -5,7 +5,8 @@ const ExpenseDetail = (props) => {
   const {
       budgetColor, budgetId, budgetItem, 
       setFullPost, hooks, handleApprove, 
-      deleteBudget, postItem, NAIRA, isGroupAdmin,
+      deleteBudget, editBudget, 
+      postItem, NAIRA, isGroupAdmin,
       isGroupMember
     } = props
 
@@ -41,10 +42,11 @@ const ExpenseDetail = (props) => {
                  <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.date} </div>
 
                  <div style={{display:"flex",gap:"40px", justifyContent:"space-between", paddingTop:"15px"}}>
-                        { isGroupMember() && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem._id, budgetItem, "approved")}} className="approve-btn elevate"
+                        { isGroupAdmin() && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem._id, budgetItem, "approved")}} className="approve-btn elevate"
                         style={{display: budgetItem.status==="pending"? "block" : "none"}} >{budgetItem.status? "confirm" : ""}</div>}
                         {isGroupAdmin() && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem?._id, budgetItem, "denied")}} className="reject-btn elevate" style={{  display: budgetItem.status==="pending"? "block" : "none"}}>{budgetItem.status? "reject" : ""}</div>}
-                        { <button style={{display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none"}} onClick={()=>{setFullPost(prev=> !prev); deleteBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">delete</button> }
+                        {isGroupAdmin() && <button style={{display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none"}} onClick={()=>{setFullPost(prev=> !prev); deleteBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">delete</button> }
+                        {isGroupMember() && <button style={{ display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none" }} onClick={()=>{setFullPost(prev=> !prev); editBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">update</button> }
 
                 </div>            
             </div>

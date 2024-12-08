@@ -58,6 +58,19 @@ const AllData = () => {
         throw(err)
     }
   }
+  const editBudget=async(id,budgetId)=>{
+    const editInfo={
+        budgetId,
+    }
+    try{
+           setLoading(true)
+           await hooks.houseTracker().editExpenseList( id, editInfo);
+           setReqId(id)
+           setLoading(false)
+    }catch(err){
+        throw(err)
+    }
+  }
 
 const sum =(groupId)=>{
     const requestTime= datafromDB?.filter(item=>(
@@ -174,6 +187,7 @@ const isGroupMember=()=>{
           handleApprove={handleApprove} 
           user={user} 
           deleteBudget={deleteBudget}
+          editBudget={editBudget}
           postItem={postItem}
           NAIRA={NAIRA}
           groupItem={groupItem}
