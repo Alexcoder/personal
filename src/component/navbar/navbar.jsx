@@ -1,4 +1,5 @@
 // import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as hooks from "../../hooks/hooks";
 import "./navbar.css";
@@ -8,10 +9,13 @@ import { useGlobalState } from '../../state/context/context';
 const Navbar = () => {
     const navigate = useNavigate();
     const {user, setUser} = useGlobalState();
+    const [group, setGroup]= useState({})
     // const desig = Number((hooks.formatDate.time).slice(0,3)) < Number(12) ? "AM" 
+    useEffect(()=>{
+      setGroup(hooks.getItemLocalStorage('groupItem'))
+    },[group])
     // : "PM"
 
- const group = hooks.getItemLocalStorage('groupItem')
  const groupName = group? group?.groupName : ""
 
   return (
