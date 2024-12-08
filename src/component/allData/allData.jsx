@@ -67,12 +67,12 @@ const AllData = () => {
     try{
            setLoading(true)
           const res = await hooks.houseTracker().editExpenseList( id, editInfo);
-        //    setReqId(id)
-         const groupItem = hooks.getItemLocalStorage(`groupItem`)
-         const editIndex = groupItem?.editExpenseList.findIndex(expense=> expense?._id===res?.data._id)
-         const temp = [datafromDB]
-         temp.splice(editIndex, 0)
-         setDatafromDB(temp)        
+           setReqId(id)
+        //  const groupItem = hooks.getItemLocalStorage(`groupItem`)
+        //  const editIndex = groupItem?.expenseList.findIndex(expense=> expense?._id===res?.data._id)
+        //  const temp = [datafromDB]
+        //  temp.splice(editIndex, 0)
+        //  setDatafromDB(temp)        
            setLoading(false)
     }catch(err){
         throw(err)
