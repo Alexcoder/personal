@@ -72,7 +72,7 @@ function Groups(){
 
     return(
         <main className="groups" >
-           { user?.group.map((group)=>(
+           {user && user?.group.map((group)=>(
             <div className="grp-map-cont" key={group} onClick={()=> groupDetail(group?.groupId, dBGroups[group?.groupId]?._doc)}>
                     <div className="grp-map-sub" onClick={()=> handleClick(group?.groupId)}>
                         <div className="grp-item-logo">{dBGroups[group?.groupId]?._doc.groupName.slice(0,1)}</div>
