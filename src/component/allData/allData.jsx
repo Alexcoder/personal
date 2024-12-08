@@ -72,7 +72,8 @@ const AllData = () => {
         //  const editIndex = groupItem?.expenseList.findIndex(expense=> expense?._id===res?.data._id)
         //  const temp = [datafromDB]
         //  temp.splice(editIndex, 0)
-        //  setDatafromDB(temp)        
+        //  setDatafromDB(temp)    
+           reactHooks.navigate(`/`)    
            setLoading(false)
     }catch(err){
         throw(err)
