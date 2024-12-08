@@ -1,4 +1,4 @@
-import React from 'react'
+// import {useState} from 'react'
 import "../allData.css"
 
 const ExpenseDetail = (props) => {
@@ -7,8 +7,10 @@ const ExpenseDetail = (props) => {
       setFullPost, hooks, handleApprove, 
       deleteBudget, editBudget, 
       postItem, NAIRA, isGroupAdmin,
-      isGroupMember
+      isGroupMember,setAmountRequired,
+      amountRequired,
     } = props
+
 
 
 
@@ -46,7 +48,18 @@ const ExpenseDetail = (props) => {
                         style={{display: budgetItem.status==="pending"? "block" : "none"}} >{budgetItem.status? "confirm" : ""}</div>}
                         {isGroupAdmin() && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem?._id, budgetItem, "denied")}} className="reject-btn elevate" style={{  display: budgetItem.status==="pending"? "block" : "none"}}>{budgetItem.status? "reject" : ""}</div>}
                         {isGroupAdmin() && <button style={{display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none"}} onClick={()=>{setFullPost(prev=> !prev); deleteBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">delete</button> }
-                        {isGroupMember() && <button style={{ display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none" }} onClick={()=>{setFullPost(prev=> !prev); editBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">update</button> }
+                        {/* {isGroupMember() && <button style={{ display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none" }} onClick={()=>{setFullPost(prev=> !prev); editBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">update</button> } */}
+                        {isGroupMember() && 
+                         <div>
+                          <input 
+                          style={{width:"50px", padding:"4px", marginBottom:"2px"}}
+                            placeholder='amountRequired'
+                            type="number"
+                            value={amountRequired}
+                            onChange={(e)=> setAmountRequired(e.target.value)}/>
+                          <button style={{ display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none" }} onClick={()=>{setFullPost(prev=> !prev); editBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">update</button> 
+                        </div> 
+                       }           
 
                 </div>            
             </div>

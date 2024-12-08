@@ -16,6 +16,7 @@ const AllData = () => {
     const [budgetId, setBudgetId] = useState("");
     const [postItem, setPostItem] = useState("");
     const [fullPost, setFullPost] = useState(false);
+    const [amountRequired, setAmountRequired] = useState();
 
     // const [fetching, setFetching] = useState(false);
     const reactHooks = useReactHooks()
@@ -60,12 +61,18 @@ const AllData = () => {
   }
   const editBudget=async(id,budgetId)=>{
     const editInfo={
-        budgetId,
+        expenseId: budgetId,
+        amountRequired,
     }
     try{
            setLoading(true)
-           await hooks.houseTracker().editExpenseList( id, editInfo);
-           setReqId(id)
+          const res = await hooks.houseTracker().editExpenseList( id, editInfo);
+        //    setReqId(id)
+         const groupItem = hooks.getItemLocalStorage(`groupItem`)
+         const editIndex = groupItem?.editExpenseList.findIndex(expense=> expense?._id===res?.data._id)
+         const temp = [datafromDB]
+         temp.splice(editIndex, 0)
+         setDatafromDB(temp)        
            setLoading(false)
     }catch(err){
         throw(err)
@@ -193,6 +200,8 @@ const isGroupMember=()=>{
           groupItem={groupItem}
           isGroupAdmin={isGroupAdmin}
           isGroupMember={isGroupMember}
+          setAmountRequired={setAmountRequired}
+          amountRequired={amountRequired}
           />
         }
 
