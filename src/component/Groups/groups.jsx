@@ -82,7 +82,7 @@ function Groups(){
                     </div>    
             </div>
             
-           )) : <button onClick={()=> reactHooks.navigate(`/`)}>Login To Continue</button>}
+           )) : <button onClick={()=> reactHooks.navigate()}>Login To Continue</button>}
            {/* { dBGroups?.map(([id, data])=>(
             <div className="grp-map-cont" key={id}>
                 {

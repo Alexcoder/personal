@@ -16,7 +16,7 @@ const Navbar = () => {
     },[group])
     // : "PM"
 
- const groupName = group? group?.groupName : ""
+ const groupName = group?.groupName
 
   return (
     <main className='nav-cont'>
