@@ -5,8 +5,12 @@ const ExpenseDetail = (props) => {
   const {
       budgetColor, budgetId, budgetItem, 
       setFullPost, hooks, handleApprove, 
-      user, deleteBudget, postItem, NAIRA
+      deleteBudget, postItem, NAIRA, isGroupAdmin,
+      isGroupMember
     } = props
+
+
+
   return (
     <div>
         <section 
@@ -37,9 +41,9 @@ const ExpenseDetail = (props) => {
                  <div className="budgetItem" style={{fontSize:"14px"}}>{budgetItem.date} </div>
 
                  <div style={{display:"flex",gap:"40px", justifyContent:"space-between", paddingTop:"15px"}}>
-                        { user?.email==="mogaleza@gmail.com" && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem._id, budgetItem, "approved")}} className="approve-btn elevate"
+                        { isGroupMember() && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem._id, budgetItem, "approved")}} className="approve-btn elevate"
                         style={{display: budgetItem.status==="pending"? "block" : "none"}} >{budgetItem.status? "confirm" : ""}</div>}
-                        { user?.email==="mogaleza@gmail.com" && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem?._id, budgetItem, "denied")}} className="reject-btn elevate" style={{  display: budgetItem.status==="pending"? "block" : "none"}}>{budgetItem.status? "reject" : ""}</div>}
+                        {isGroupAdmin() && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem?._id, budgetItem, "denied")}} className="reject-btn elevate" style={{  display: budgetItem.status==="pending"? "block" : "none"}}>{budgetItem.status? "reject" : ""}</div>}
                         { <button style={{display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none"}} onClick={()=>{setFullPost(prev=> !prev); deleteBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">delete</button> }
 
                 </div>            

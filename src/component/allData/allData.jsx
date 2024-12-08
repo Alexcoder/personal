@@ -19,8 +19,8 @@ const AllData = () => {
 
     // const [fetching, setFetching] = useState(false);
     const reactHooks = useReactHooks()
-    console.log("datafromDB", datafromDB)
-    console.log('budgetItem', budgetItem)
+    // console.log("datafromDB", datafromDB)
+    // console.log('budgetItem', budgetItem)
     // console.log('budgetItemCreator', budgetItemCreator)
 
     useEffect(()=>{
@@ -131,7 +131,18 @@ const setUpNewUser=()=>{
     reactHooks.navigate(`/allUsers`)
 };
 
-const item = hooks.getItemLocalStorage(`groupItem`)
+const groupItem = hooks.getItemLocalStorage(`groupItem`)
+
+const isGroupMember=()=>{  
+    const isMember = groupItem?.groupMember.find( member=> member.id.toString().includes(user?._id) )
+    return isMember
+   }
+   const isGroupAdmin=()=>{  
+    const isAdmin = groupItem?.groupAdmin.find( member=> member.id.toString().includes(user?._id) )
+    return isAdmin
+   }
+
+
 
 
 
@@ -141,7 +152,7 @@ const item = hooks.getItemLocalStorage(`groupItem`)
         {loading ? "page loading...": 
            datafromDB.length<1? "No Data Found": 
            <ExpenseList 
-             item={item} 
+             groupItem={groupItem} 
              deleteItem={deleteItem} 
              hooks={hooks} 
              check={check}
@@ -149,6 +160,8 @@ const item = hooks.getItemLocalStorage(`groupItem`)
              sum={sum}
              budgetColor={budgetColor}
              NAIRA={NAIRA}
+             isGroupAdmin={isGroupAdmin}
+             isGroupMember={isGroupMember}   
              /> }
         
         { fullPost &&
@@ -163,6 +176,9 @@ const item = hooks.getItemLocalStorage(`groupItem`)
           deleteBudget={deleteBudget}
           postItem={postItem}
           NAIRA={NAIRA}
+          groupItem={groupItem}
+          isGroupAdmin={isGroupAdmin}
+          isGroupMember={isGroupMember}
           />
         }
 

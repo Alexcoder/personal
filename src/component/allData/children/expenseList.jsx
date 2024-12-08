@@ -1,15 +1,15 @@
 import React from 'react'
 import "../allData.css"
 
-const ExpenseList = ({item, deleteItem, hooks, check, view, budgetColor, sum, NAIRA}) => {
+const ExpenseList = ({groupItem, deleteItem, hooks, check, view, budgetColor, sum, NAIRA}) => {
 
   return (
     <div>
-        <div key={item?._id} className="mapCont">
+        <div key={groupItem?._id} className="mapCont">
           <button
             className='delete-btn'
             disabled={true}
-            onClick={()=> deleteItem(item?._id)}>
+            onClick={()=> deleteItem(groupItem?._id)}>
             X
         </button>
         {/* <section style={{display:"flex"}}>
@@ -17,13 +17,13 @@ const ExpenseList = ({item, deleteItem, hooks, check, view, budgetColor, sum, NA
           >{item?.groupName}</strong></div>
           <div>New Member</div> 
         </section> */}
-        <div><strong className="item">{sum(item?._id)}</strong></div>
+        <div><strong className="item">{sum(groupItem?._id)}</strong></div>
         <section className='budgetWrapper'>
-        {item?.expenseList.map(expense=>(
+        {groupItem?.expenseList.map(expense=>(
             <div 
             key={expense?._id} 
             className="budget" 
-            onClick={()=> view(item, expense, expense?._id)}
+            onClick={()=> view(groupItem, expense, expense?._id)}
             style={{backgroundColor: budgetColor(expense?.status)}}
             >
             {/* <section style={{display:"flex", justifyContent:"space-between"}}> */}

@@ -13,7 +13,7 @@ const Navbar = () => {
     // const desig = Number((hooks.formatDate.time).slice(0,3)) < Number(12) ? "AM" 
     useEffect(()=>{
       setGroup(hooks.getItemLocalStorage('groupItem'))
-    },[group])
+    },[])
     // : "PM"
 
  const groupName = group?.groupName
