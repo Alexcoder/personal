@@ -66,13 +66,13 @@ const AllData = () => {
     }
     try{
            setLoading(true)
-           await hooks.houseTracker().editExpenseList( id, editInfo);
+           const res = await hooks.houseTracker().editExpenseList( id, editInfo);
            setReqId(id)
-        //  const groupItem = hooks.getItemLocalStorage(`groupItem`)
-        //  const editIndex = groupItem?.expenseList.findIndex(expense=> expense?._id===res?.data._id)
-        //  const temp = [datafromDB]
-        //  temp.splice(editIndex, 0)
-        //  setDatafromDB(temp)    
+         const groupItem = hooks.getItemLocalStorage(`groupItem`)
+         const editIndex = groupItem?.expenseList.findIndex(expense=> expense?._id===res?.data._id)
+         const temp = [datafromDB]
+         temp[editIndex]= res?.data
+         setDatafromDB([...temp])    
            reactHooks.navigate(`/`)    
            setLoading(false)
     }catch(err){

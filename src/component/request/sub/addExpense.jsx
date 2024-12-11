@@ -16,6 +16,8 @@ const AddExpense = ({request, setRequest, formData, handleChange, handleClick, i
              "LightBill", "Water","Security",
              "House Rent", "Church", "Family Support",
              "Clothing", "Shoe", "Groceries",
+             "kitchen","Furniture", "Cutlery",
+             "Friends",
             "Others"
           ]}
            name={"purpose"}
