@@ -31,7 +31,8 @@ const ExpenseDetail = (props) => {
                 color:"white",
                 padding: "10px",
                 borderRadius: "2px",
-                gap:"4px"
+                gap:"4px",
+                width: "70%"
             }}>
                 <div style={{float:"right", marginLeft:"10px"}}>
                 <button onClick={()=> setFullPost(prev=> !prev)}>X</button>
