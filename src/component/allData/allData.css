@@ -5,14 +5,14 @@
     background-color: aliceblue;
     padding: 2px 2px;
     border-radius: 2px;
-    min-height: 86vh;
+    height: 560px;
    
 }
 .budgetWrapper{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 4px;
-    max-height: 500px;
+    max-height: 450px;
     overflow: auto;
 }
 .budget{

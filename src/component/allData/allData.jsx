@@ -167,7 +167,6 @@ const isGroupMember=()=>{
 
 
 
-
   return (
     <div className='allData'>
         {loading ? "page loading...": 
@@ -182,7 +181,7 @@ const isGroupMember=()=>{
              budgetColor={budgetColor}
              NAIRA={NAIRA}
              isGroupAdmin={isGroupAdmin}
-             isGroupMember={isGroupMember}   
+             isGroupMember={isGroupMember}  
              /> }
         
         { fullPost &&

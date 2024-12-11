@@ -72,30 +72,17 @@ function Groups(){
 
     return(
         <main className="groups" >
-           {user ? user.group.map((group)=>(
-            <div className="grp-map-cont" key={group} onClick={()=> groupDetail(group?.groupId, dBGroups[group?.groupId]?._doc)}>
+           {dBGroups ? user.group.map((group)=>(
+            <div className="grp-map-cont" key={group?.groupId} onClick={()=> groupDetail(group?.groupId, dBGroups[group?.groupId]?._doc)}>
                     <div className="grp-map-sub" onClick={()=> handleClick(group?.groupId)}>
                         <div className="grp-item-logo">{dBGroups[group?.groupId]?._doc.groupName.slice(0,1)}</div>
                         <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupName}</div>
                         <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupMember.length}</div>
-                        <div className="grp-item">{dBGroups[group?.groupId]?._doc.expenseList.length}requests</div>
-                    </div>    
+                        <div className="grp-item">{dBGroups[group?.groupId]?._doc.expenseList.length}{dBGroups[group?.groupId]? "requests" : "fetching"}</div>
+                    </div> 
             </div>
             
            )) : <button onClick={()=> reactHooks.navigate(`/`)}>Login To Continue</button>}
-           {/* { dBGroups?.map(([id, data])=>(
-            <div className="grp-map-cont" key={id}>
-                {
-                  data.map(item=>(
-                    <div className="grp-map-sub" onClick={()=> handleClick(item?._id)}>
-                        <div className="grp-item-logo">{item.groupName.slice(0,1)}</div>
-                        <div className="grp-item">{item.groupName}</div>
-                    </div>    
-                  ))   
-                }
-            </div>
-           ))} */}
-
            {
             <div
             style={{}}
