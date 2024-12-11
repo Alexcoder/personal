@@ -7,7 +7,7 @@
     border-radius: 2px;
     height: 560px;
     @media screen and (max-width: 600px) {
-      height: 600px;  
+      height: 660px;  
     }
    
 }
@@ -17,6 +17,10 @@
     gap: 4px;
     max-height: 450px;
     overflow: auto;
+    @media screen and (max-width: 600px) {
+        height: 400px;  
+      }
+  
 }
 .budget{
     background-color: orange;
