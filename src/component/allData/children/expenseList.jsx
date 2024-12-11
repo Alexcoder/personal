@@ -31,7 +31,7 @@ const ExpenseList = ({groupItem, deleteItem, hooks, check, view, budgetColor, su
         <section style={{display:""}} >
           <div><strong className="month-year"
           >{groupItem?.groupName}</strong></div>
-          <button onClick={()=> setIsApproved(prev=> !prev)}>see {viewbtn[isApproved]}</button> 
+          <button style={{padding:"8px"}} onClick={()=> setIsApproved(prev=> !prev)}>see {viewbtn[isApproved]}</button> 
         </section>
         <div><strong className="item">{sum(groupItem?._id)}</strong></div>
         <section className='budgetWrapper'>
