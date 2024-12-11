@@ -50,7 +50,7 @@ const ExpenseDetail = (props) => {
                         {isGroupAdmin() && <div onClick={()=>{setFullPost(prev=> !prev);  handleApprove(postItem?._id, budgetItem?._id, budgetItem, "denied")}} className="reject-btn elevate" style={{  display: budgetItem.status==="pending"? "block" : "none"}}>{budgetItem.status? "reject" : ""}</div>}
                         {isGroupAdmin() && <button style={{display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none"}} onClick={()=>{setFullPost(prev=> !prev); deleteBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">delete</button> }
                         {/* {isGroupMember() && <button style={{ display: budgetItem.status==="pending"? "block": budgetItem.status==="denied" ? "block" : "none" }} onClick={()=>{setFullPost(prev=> !prev); editBudget(postItem?._id, budgetId)}} className="elevate delete-budget-btn">update</button> } */}
-                        {isGroupMember() && 
+                        {(isGroupMember() && budgetItem.status==="pending") && 
                          <div>
                           <input 
                           style={{width:"50px", padding:"4px", marginBottom:"2px"}}
