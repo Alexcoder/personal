@@ -17,6 +17,8 @@ const AllData = () => {
     const [postItem, setPostItem] = useState("");
     const [fullPost, setFullPost] = useState(false);
     const [amountRequired, setAmountRequired] = useState();
+    const [isApproved, setIsApproved]=useState("all")
+
 
     // const [fetching, setFetching] = useState(false);
     const reactHooks = useReactHooks()
@@ -92,10 +94,10 @@ const sum =(groupId)=>{
     const amountApproved = filterApproved.reduce((acc, value)=>(acc + value.amountRequired),0)
     const amountPending = amountRequired-amountApproved
 return  (
-    <div style={{display:"flex", justifyContent:"space-between", padding:"10px 5px"}}>
-    <div style={{color:"green"}}>{NAIRA} {hooks.formatNumber(amountApproved)}</div>    
-    <div style={{fontSize:"18px"}}>{NAIRA} {hooks.formatNumber(amountRequired)}</div>    
-    <div style={{color:"orange"}}>{NAIRA} {hooks.formatNumber(amountPending)}</div>    
+    <div style={{display:"flex", justifyContent:"space-between", padding:"10px 5px", cursor:"pointer"}}>
+    <div onClick={()=> setIsApproved("approved")} style={{color:"green", border:"1px solid lightgray", padding:"8px", boxShadow:"2px 2px 2px 0px gray",borderRadius:"2px", background: isApproved==="approved"? "darkgray" : ""}}>{NAIRA} {hooks.formatNumber(amountApproved)}</div>    
+    <div onClick={()=> setIsApproved("all")} style={{fontSize:"18px",border:"1px solid lightgray", padding:"8px", boxShadow:"2px 2px 2px 0px gray",borderRadius:"2px", background: isApproved==="all"? "darkgray": ""}}>{NAIRA} {hooks.formatNumber(amountRequired)}</div>    
+    <div onClick={()=> setIsApproved("pending")} style={{color:isApproved==="pending"? "darkOrange": "orange", border:"1px solid lightgray", padding:"8px", boxShadow:"2px 2px 2px 0px gray",borderRadius:"2px", background: isApproved==="pending"? "lightgray" : ""}}>{NAIRA} {hooks.formatNumber(amountPending)}</div>    
     </div>
 )
 };
@@ -181,7 +183,10 @@ const isGroupMember=()=>{
              budgetColor={budgetColor}
              NAIRA={NAIRA}
              isGroupAdmin={isGroupAdmin}
-             isGroupMember={isGroupMember}  
+             isGroupMember={isGroupMember} 
+             isApproved={isApproved} 
+             setIsApproved={setIsApproved}
+ 
              /> }
         
         { fullPost &&

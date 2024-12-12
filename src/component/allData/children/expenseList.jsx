@@ -1,21 +1,32 @@
-import {useState} from 'react'
+// import {useState} from 'react'
 import "../allData.css"
 
-const ExpenseList = ({groupItem, deleteItem, hooks, check, view, budgetColor, sum, NAIRA,}) => {
-
-  const [isApproved, setIsApproved]=useState(false)
+const ExpenseList = (props) => {
+ const {
+   groupItem,
+   deleteItem, 
+   hooks, 
+   check, 
+   view, 
+   budgetColor, 
+   sum, 
+   NAIRA,
+   isApproved, 
+   } = props
 
   const status={
-    true: "approved",
-    false : "pending",
+    approved: "approved",
+    pending : "pending",
+    all     : "",
   }
   const viewbtn={
-    true  : "pending request",
-    false : "approved request",
+    approved  : "pending request",
+    pending : "approved request",
+    all     : "",
   }
 
-  const pendingExpense=()=>{
-   const filter =  groupItem?.expenseList?.filter(item=> item?.status===status[isApproved])
+  const filterExpense=()=>{
+   const filter =  groupItem?.expenseList?.filter(item=> item?.status.includes(status[isApproved]))
    console.log("filter", filter)
    return filter
   }
@@ -31,11 +42,11 @@ const ExpenseList = ({groupItem, deleteItem, hooks, check, view, budgetColor, su
         <section style={{display:""}} >
           <div><strong className="month-year"
           >{groupItem?.groupName}</strong></div>
-          <button style={{padding:"8px"}} onClick={()=> setIsApproved(prev=> !prev)}>see {viewbtn[isApproved]}</button> 
+          {/* <button style={{padding:"8px"}} onClick={()=> setIsApproved(prev=> !prev)}>see {viewbtn[isApproved]}</button>  */}
         </section>
         <div><strong className="item">{sum(groupItem?._id)}</strong></div>
         <section className='budgetWrapper'>
-        {pendingExpense()?.length? pendingExpense().map(expense=>(
+        {filterExpense()?.length? filterExpense().map(expense=>(
             <div 
             key={expense?._id} 
             className="budget" 
