@@ -213,14 +213,14 @@ const isGroupMember=()=>{
 
         { addRequest && <Request/>}
 
-        <div style={{ position:"fixed", top:"60px", left:"0px", right:"0px",background:"inherit",
+        <div style={{ position:"fixed", bottom:"3px", right:"4px",background:"darkRed",
 }}>        
  {/* <div>{item?.groupName}</div> */}
             <button 
             onClick={()=> setUpNewUser()}
             style={{
                 border:"none",
-                background:"inherit", color:"darkred",
+                background:"inherit", color:"white",
                 fontSize:"14px",
                 padding:"8px 12px", borderRadius:"2px", fontWeight:"600",
                  }}>New Member </button>
