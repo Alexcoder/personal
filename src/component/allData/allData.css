@@ -18,7 +18,7 @@
     max-height: 450px;
     overflow: auto;
     @media screen and (max-width: 600px) {
-        max-height: 500px;  
+        max-height: 510px;  
       }
   
 }
