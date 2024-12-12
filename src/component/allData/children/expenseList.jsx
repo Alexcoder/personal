@@ -60,7 +60,7 @@ const ExpenseList = (props) => {
                 <div className="budgetItem" style={{fontSize:"10px"}}>{expense?.date && expense?.date.slice(0,5)}  {expense?.firstName}</div>
             {/* </section> */}
             </div>
-        )).reverse() : <div style={{position:"fixed", top:"350px",left:"140px",textTransform:"uppercase"}}>no request {viewbtn[!isApproved]}</div>}
+        )).reverse() : <div style={{position:"fixed", top:"450px",left:"140px",textTransform:"uppercase"}}>no request {viewbtn[!isApproved]}</div>}
         </section>
     </div>
 

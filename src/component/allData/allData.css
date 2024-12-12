@@ -8,6 +8,7 @@
     height: 560px;
     @media screen and (max-width: 600px) {
       height: fit-content;  
+      min-height: 400px;
     }
    
 }
