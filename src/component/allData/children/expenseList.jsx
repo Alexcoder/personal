@@ -27,7 +27,6 @@ const ExpenseList = (props) => {
 
   const filterExpense=()=>{
    const filter =  groupItem?.expenseList?.filter(item=> item?.status.includes(status[isApproved]))
-   console.log("filter", filter)
    return filter
   }
   return (
