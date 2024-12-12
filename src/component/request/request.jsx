@@ -60,7 +60,7 @@ function Request (){
             setRequest(initialState)
             setDatafromDB([...datafromDB, res?.data])
             setUser(hooks.getItemLocalStorage("user"))
-            navigate("/groups")
+            navigate("/")
             setMessage("Request added successfully")
           }
 

@@ -57,6 +57,7 @@ const AllData = () => {
            await hooks.deletePost(`/houseTracker/deleteBudget/${id}/${budgetId}`);
            setReqId(id)
            setLoading(false)
+           reactHooks.navigate(`/`)
     }catch(err){
         throw(err)
     }
