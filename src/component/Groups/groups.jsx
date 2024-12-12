@@ -76,9 +76,9 @@ function Groups(){
             <div className="grp-map-cont" key={group?.groupId} onClick={()=> groupDetail(group?.groupId, dBGroups[group?.groupId]?._doc)}>
                     <div className="grp-map-sub" onClick={()=> handleClick(group?.groupId)}>
                         <div className="grp-item-logo">{dBGroups[group?.groupId]?._doc.groupName.slice(0,1)}</div>
-                        <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupName}</div>
-                        <div className="grp-item">{dBGroups[group?.groupId]?._doc.groupMember.length}</div>
-                        <div className="grp-item">{dBGroups[group?.groupId]?._doc.expenseList.length}{dBGroups[group?.groupId]? "requests" : "fetching"}</div>
+                        <div className="grp-item-name">{dBGroups[group?.groupId]?._doc.groupName}</div>
+                        <div className="grp-item-member">{dBGroups[group?.groupId]?._doc.groupMember.length}m</div>
+                        <div className="grp-item-request">{dBGroups[group?.groupId]?._doc.expenseList.length}{dBGroups[group?.groupId]? "-request" : <span style={{fontStyle:"italic", fontWeight:"300"}}>fetching...</span>}</div>
                     </div> 
             </div>
             
