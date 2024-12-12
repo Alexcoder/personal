@@ -26,10 +26,11 @@
 }
 .footer-btn{
     padding: 8px;
-    background: rgb(114, 8, 8);
-    color: white;
+    background: none;
+    /* background: rgb(114, 8, 8); */
+    color: darkred;
     border: none;
     border-radius: 2px;
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 600;
 }

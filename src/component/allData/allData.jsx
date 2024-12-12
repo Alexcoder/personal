@@ -213,7 +213,7 @@ const isGroupMember=()=>{
 
         { addRequest && <Request/>}
 
-        <div style={{ position:"fixed", bottom:"4px", right:"4px",background:"darkRed",
+        <div style={{ position:"fixed", bottom:"4px", right:"4px",background:"inherit",
         zIndex:"101"
 }}>        
  {/* <div>{item?.groupName}</div> */}
@@ -221,9 +221,9 @@ const isGroupMember=()=>{
             onClick={()=> setUpNewUser()}
             style={{
                 border:"none",
-                background:"inherit", color:"white",
+                background:"inherit", color:"darkRed",
                 fontSize:"12px",
-                padding:"8px 12px", borderRadius:"2px", fontWeight:"400",
+                padding:"8px 12px", borderRadius:"2px", fontWeight:"600",
                  }}>Add Member </button>
                  {/* <div>{item?.groupName}</div> */}
         </div>
