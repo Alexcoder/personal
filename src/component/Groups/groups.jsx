@@ -68,17 +68,23 @@ function Groups(){
         reactHooks.navigate(`/allData?group-name=${groupItem.groupName}&groupId=${groupId}`)
       }
   
-  
+  const groupItem=(id, Item)=>{
+    return (
+        <>
+            <div className="grp-item-logo">{  Item?.groupName.slice(0,1)}</div>
+            <div className="grp-item-name">{Item? Item?.groupName : <span style={{fontStyle:"italic", fontWeight:"300"}}>fetching...</span>}</div>
+            <div className="grp-item-member">{Item?.groupMember.length}{Item && "m"}</div>
+            <div className="grp-item-request">{Item?.expenseList.length}{id? "-request" : ""}</div>
+        </>
+    )
+  }
 
     return(
         <main className="groups" >
            {dBGroups ? user.group.map((group)=>(
             <div className="grp-map-cont" key={group?.groupId} onClick={()=> groupDetail(group?.groupId, dBGroups[group?.groupId]?._doc)}>
                     <div className="grp-map-sub" onClick={()=> handleClick(group?.groupId)}>
-                        <div className="grp-item-logo">{dBGroups[group?.groupId]?._doc.groupName.slice(0,1)}</div>
-                        <div className="grp-item-name">{dBGroups[group?.groupId]?._doc.groupName}</div>
-                        <div className="grp-item-member">{dBGroups[group?.groupId]?._doc.groupMember.length}m</div>
-                        <div className="grp-item-request">{dBGroups[group?.groupId]?._doc.expenseList.length}{dBGroups[group?.groupId]? "-request" : <span style={{fontStyle:"italic", fontWeight:"300"}}>fetching...</span>}</div>
+                       <>{ groupItem(dBGroups[group?.groupId], dBGroups[group?.groupId]?._doc)}</> 
                     </div> 
             </div>
             
